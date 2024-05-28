@@ -14,13 +14,13 @@ GPT-4、Claude3、Gemini、Grok、ChatGLM4
 
 #### 可用的大语言模型（众多）
 
-==llama3==（8B/70B）——填写问卷申请[meta-llama/Meta-Llama-3-8B · Hugging Face](https://huggingface.co/meta-llama/Meta-Llama-3-8B)、[meta-llama/Meta-Llama-3-70B · Hugging Face](https://huggingface.co/meta-llama/Meta-Llama-3-70B)
+llama3（8B/70B）——填写问卷申请[meta-llama/Meta-Llama-3-8B · Hugging Face](https://huggingface.co/meta-llama/Meta-Llama-3-8B)、[meta-llama/Meta-Llama-3-70B · Hugging Face](https://huggingface.co/meta-llama/Meta-Llama-3-70B)
 
-==Gemma==（7B）——填写问卷申请[google/gemma-7b · Hugging Face](https://huggingface.co/google/gemma-7b)
+Gemma（7B）——填写问卷申请[google/gemma-7b · Hugging Face](https://huggingface.co/google/gemma-7b)
 
-==GLM3==（6B）——[THUDM (github.com)](https://github.com/THUDM)、[THUDM (Knowledge Engineering Group (KEG) & Data Mining at Tsinghua University) (huggingface.co)](https://huggingface.co/THUDM)
+GLM3（6B）——[THUDM (github.com)](https://github.com/THUDM)、[THUDM (Knowledge Engineering Group (KEG) & Data Mining at Tsinghua University) (huggingface.co)](https://huggingface.co/THUDM)
 
-==Phi2==（2.7B）——[microsoft/phi-2 · Hugging Face](https://huggingface.co/microsoft/phi-2)
+Phi2（2.7B）——[microsoft/phi-2 · Hugging Face](https://huggingface.co/microsoft/phi-2)
 
 
 
