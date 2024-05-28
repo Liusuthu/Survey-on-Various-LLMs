@@ -6,7 +6,7 @@
 
 分类：Base模型/Chat模型
 
-<img src="./assets/Revolution" alt="img" style="zoom: 67%;" />
+<img src="./assets/Revolution.png" alt="img" style="zoom: 67%;" />
 
 #### 比较领先的大语言模型
 
@@ -374,7 +374,7 @@ GPT-4、Claude3、Gemini、Grok、ChatGLM4
 
 *GPT-4o输出*
 
-<img src="./assets/GPT4oOutput" style="zoom: 50%;" />
+<img src="./assets/GPT4oOutput.png" style="zoom: 50%;" />
 
 
 
