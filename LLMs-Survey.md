@@ -6,7 +6,7 @@
 
 分类：Base模型/Chat模型
 
-<img src="https://shmc.tongji.edu.cn/_upload/article/images/83/80/4a811983443a8d053ab985ffe086/d798c5ec-761a-4d78-a892-a584edb34137.png" alt="img" style="zoom: 67%;" />
+<img src="./assets/Revolution" alt="img" style="zoom: 67%;" />
 
 #### 比较领先的大语言模型
 
@@ -326,7 +326,8 @@ GPT-4、Claude3、Gemini、Grok、ChatGLM4
 | A800     | 20 TFLOPS           | 80GB HBM2e       | HBM2e    | 2 TB/s     |
 | H100     | 60 TFLOPS           | 80GB HBM2e       | HBM2e    | 2 TB/s     |
 
-![image-20240527213941511](C:\Users\asus\AppData\Roaming\Typora\typora-user-images\image-20240527213941511.png)
+
+![image-20240527213941511](./assets/HuggingFaceGPUs.png)
 
 - 显存与参数量关系计算：每个float32参数要占4字节，因此有（数量级）$最小显存大小=模型参数量×4$
 
@@ -334,7 +335,7 @@ GPT-4、Claude3、Gemini、Grok、ChatGLM4
 
 ### **一些建议情况**
 
-<img src="C:\Users\asus\AppData\Roaming\Typora\typora-user-images\image-20240527214257994.png" alt="image-20240527214257994" style="zoom:50%;" />
+<img src="./assets/Recommendation.png" style="zoom:50%;" />
 
 
 
@@ -373,13 +374,13 @@ GPT-4、Claude3、Gemini、Grok、ChatGLM4
 
 *GPT-4o输出*
 
-<img src="C:\Users\asus\AppData\Roaming\Typora\typora-user-images\image-20240527222107101.png" alt="image-20240527222107101" style="zoom: 50%;" />
+<img src="./assets/GPT4oOutput" style="zoom: 50%;" />
 
 
 
 ### Qwen系列
 
-<img src="C:\Users\asus\AppData\Roaming\Typora\typora-user-images\QwenInference.png" alt="image-20240527221655195" style="zoom: 50%;" />
+<img src="./assets/QwenInference.png" style="zoom: 50%;" />
 
 
 
