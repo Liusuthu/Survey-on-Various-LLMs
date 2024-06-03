@@ -36,7 +36,7 @@ Meta AI 的研究人员引入了一种叫做[检索增强生成（Retrieval Augm
 
 ## 简单RAG
 
-<img src="C:\Users\asus\Desktop\assets\naiveRAG.png" alt="naiveRAG" style="zoom: 80%;" />
+<img src=".\assets\naiveRAG.png" alt="naiveRAG" style="zoom: 80%;" />
 
 输入为query，分为两路进行：
 
@@ -75,7 +75,7 @@ def question_answering(context, query):
 
 有更多可用的工具。
 
-<img src="C:\Users\asus\Desktop\assets\advancedRAG.png" alt="advancedRAG"  />
+<img src=".\assets\advancedRAG.png" alt="advancedRAG"  />
 
 
 
@@ -93,7 +93,7 @@ def question_answering(context, query):
 
 #### 向量存储索引
 
-<img src="C:\Users\asus\Desktop\assets\basicindex.png" alt="basicindex" style="zoom:80%;" />
+<img src=".\assets\basicindex.png" alt="basicindex" style="zoom:80%;" />
 
 比较基础的搜索索引方式，将query向量与数据库中各种数据的向量比对找出前K个最相似的。可以有多种搜索方式。
 
@@ -101,7 +101,7 @@ def question_answering(context, query):
 
 #### 层次索引
 
-<img src="C:\Users\asus\Desktop\assets\herarchicalindex.png" alt="herarchicalindex" style="zoom: 67%;" />
+<img src=".\assets\herarchicalindex.png" alt="herarchicalindex" style="zoom: 67%;" />
 
 引入了一个分步操作，先检索摘要索引，再对应检索相应的文档。对于处理大型数据库更高效。
 
@@ -125,11 +125,11 @@ def question_answering(context, query):
 
 **①句子窗口检索**：文档中的每个句子都被单独嵌入向量，这样做可以提高查询到上下文的余弦距离搜索的准确度。在检索到的关键句子前后各扩展k个句子，然后将这个扩展的上下文发送给LLM。
 
-<img src="C:\Users\asus\Desktop\assets\SentenceWindow.png" alt="SentenceWindow" style="zoom: 80%;" />
+<img src=".\assets\SentenceWindow.png" alt="SentenceWindow" style="zoom: 80%;" />
 
 **②自动合并检索器**：文档被分割成较小的子块，这些子块又与更大的父块相对应。首先搜索更精细的信息片段，然后在将这些上下文信息提供给LLM进行推理之前，先扩展到父块的上下文窗口。
 
-<img src="C:\Users\asus\Desktop\assets\parentchunks.png" alt="parentchunks" style="zoom:67%;" />
+<img src=".\assets\parentchunks.png" alt="parentchunks" style="zoom:67%;" />
 
 在检索过程中，首先获取较小的数据块。如果在前k个检索到的块中，有超过n个块指向同一个父节点（即更大的块），那么我们就用这个父节点来替换原先提供给大语言模型（LLM）的上下文内容。这个过程类似于自动将几个小块合并成一个更大的父块，因此得名。
 
@@ -141,7 +141,7 @@ def question_answering(context, query):
 
 结合传统的关键词搜索与现代的语义向量搜素，产生综合的检测结果。
 
-<img src="C:\Users\asus\Desktop\assets\fusion.png" alt="fusion" style="zoom:67%;" />
+<img src=".\assets\fusion.png" alt="fusion" style="zoom:67%;" />
 
 
 
@@ -161,7 +161,7 @@ def question_answering(context, query):
 
 属于Prompt Engineering，使用LLM对用户的query进行优化，进而提高检索质量。有多种实现方法。例如可以将query分步（思维链方法），也可分为多个子查询进行并行查询，随后组合为一个输入。
 
-<img src="C:\Users\asus\Desktop\assets\querytransform.png" alt="querytransform" style="zoom: 67%;" />
+<img src=".\assets\querytransform.png" alt="querytransform" style="zoom: 67%;" />
 
 
 
@@ -172,7 +172,7 @@ def question_answering(context, query):
 - 一种受欢迎且相对简单的方法是使用 ContextChatEngine。这种引擎首先检索与用户查询相关的上下文，然后将其连同聊天历史从内存缓冲区一起发送给 LLM，确保 LLM 在生成下一条回答时能够理解之前的上下文。
 - 更为复杂的一个例子是 CondensePlusContextMode。在这种模式下，每次互动中的聊天历史和最后一条消息会被压缩成一个新的查询。然后，这个查询被发送到索引系统，检索到的上下文连同原始用户消息一起回传。
 
-![chatengine](C:\Users\asus\Desktop\assets\chatengine.png)
+<img src=".\assets\chatengine.png" alt="querytransform" style="zoom: 67%;" />
 
 
 
@@ -238,7 +238,7 @@ Langchain是一个开源框架，允许开发者将LLM与外部计算和数据�
 
 https://www.bilibili.com/video/BV14o4y1K7y3/?spm_id_from=333.337.search-card.all.click
 
-<img src="C:\Users\asus\AppData\Roaming\Typora\typora-user-images\image-20240603174553537.png" alt="image-20240603174553537" style="zoom: 33%;" />
+
 
 
 
@@ -248,7 +248,7 @@ https://www.bilibili.com/video/BV14o4y1K7y3/?spm_id_from=333.337.search-card.all
 
 #### 工作流程
 
-<img src="C:\Users\asus\Desktop\assets\langchain+chatglm.png" alt="langchain+chatglm" style="zoom: 67%;" />
+<img src=".\assets\langchain+chatglm.png" alt="langchain+chatglm" style="zoom: 67%;" />
 
 过程包括加载文件 -> 读取文本 -> 文本分割 -> 文本向量化 -> 问句向量化 -> 在文本向量中匹配出与问句向量最相似的 `top k`个 -> 匹配出的文本作为上下文和问题一起添加到 `prompt`中 -> 提交给 `LLM`生成回答。
 
