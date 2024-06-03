@@ -260,7 +260,7 @@ https://www.bilibili.com/video/BV14o4y1K7y3/?spm_id_from=333.337.search-card.all
 
 
 
-**逐级递进**
+**开源项目：逐级递进**
 
 - [langchain-ai/langchain: 🦜🔗 Build context-aware reasoning applications (github.com)](https://github.com/langchain-ai/langchain)
 
