@@ -6,7 +6,7 @@
 
 <img src="./assets/transformer.png" style="zoom: 25%;" >
 
-大部分用于序列转换(sequence transduction)的模型通常都由一个编码器(Encoder)和一个解码器(Decoder)组成，Transformer也遵从了这种设计。简单来讲，编码器可以将符号表示的输入序列$\mathbf x=(x_1,\cdots,x_n)$映射为表征(representation)序列$\mathbf z=(z_1,\cdots,z_n)$。当给定了表征序列后，解码器可以可以生成符号输出序列$\mathbf y=(y_1,\cdots,y_m)$，其中每个时刻解码器可以生成一个字符$y_i$，并且其总是自回归的，使用先前生成的符号作为额外输入。
+大部分用于序列转换(sequence transduction)的模型通常都由一个编码器(Encoder)和一个解码器(Decoder)组成，Transformer也遵从了这种设计。简单来讲，编码器可以将符号表示的输入序列$'\mathbf x=(x_1,\cdots,x_n)'$映射为表征(representation)序列$'\mathbf z=(z_1,\cdots,z_n)'$。当给定了表征序列后，解码器可以可以生成符号输出序列$'\mathbf y=(y_1,\cdots,y_m)'$，其中每个时刻解码器可以生成一个字符$y_i$，并且其总是自回归的，使用先前生成的符号作为额外输入。
 
 
 
