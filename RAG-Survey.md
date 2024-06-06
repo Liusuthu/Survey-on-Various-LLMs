@@ -267,3 +267,32 @@ https://www.bilibili.com/video/BV14o4y1K7y3/?spm_id_from=333.337.search-card.all
 - [chatchat-space/Langchain-Chatchat: Langchain-Chatchat（原Langchain-ChatGLM）基于 Langchain 与 ChatGLM 等语言模型的本地知识库问答 | Langchain-Chatchat (formerly langchain-ChatGLM), local knowledge based LLM (like ChatGLM) QA app with langchain (github.com)](https://github.com/chatchat-space/Langchain-Chatchat)
 
 - [X-D-Lab/LangChain-ChatGLM-Webui: 基于LangChain和ChatGLM-6B等系列LLM的针对本地知识库的自动问答 (github.com)](https://github.com/X-D-Lab/LangChain-ChatGLM-Webui)
+
+
+
+
+
+
+
+## 开源项目
+
+- infiniflow/ragflow：[infiniflow/ragflow: RAGFlow is an open-source RAG (Retrieval-Augmented Generation) engine based on deep document understanding. (github.com)](https://github.com/infiniflow/ragflow)
+
+- explodinggradients/ragas：[explodinggradients/ragas: Evaluation framework for your Retrieval Augmented Generation (RAG) pipelines (github.com)](https://github.com/explodinggradients/ragas)
+
+- run-llama/rags：[run-llama/rags: Build ChatGPT over your data, all with natural language (github.com)](https://github.com/run-llama/rags)
+
+- langgenius/dify：[langgenius/dify: Dify is an open-source LLM app development platform. Dify's intuitive interface combines AI workflow, RAG pipeline, agent capabilities, model management, observability features and more, letting you quickly go from prototype to production. (github.com)](https://github.com/langgenius/dify)
+
+- langflow-ai/langflow：[langflow-ai/langflow: ⛓️ Langflow is a visual framework for building multi-agent and RAG applications. It's open-source, Python-powered, fully customizable, model and vector store agnostic. (github.com)](https://github.com/langflow-ai/langflow)
+- vanna-ai/vanna：[vanna-ai/vanna: 🤖 Chat with your SQL database 📊. Accurate Text-to-SQL Generation via LLMs using RAG 🔄. (github.com)](https://github.com/vanna-ai/vanna)
+- weaviate/Verba：[weaviate/Verba: Retrieval Augmented Generation (RAG) chatbot powered by Weaviate (github.com)](https://github.com/weaviate/Verba)
+- llmware-ai/llmware(小模型)：[llmware-ai/llmware: Unified framework for building enterprise RAG pipelines with small, specialized models (github.com)](https://github.com/llmware-ai/llmware)
+- pathwaycom/llm-app：[pathwaycom/llm-app: LLM App templates for RAG, knowledge mining, and stream analytics. Ready to run with Docker,⚡in sync with your data sources. (github.com)](https://github.com/pathwaycom/llm-app)
+- truefoundry/cognita：[truefoundry/cognita: RAG (Retrieval Augmented Generation) Framework for building modular, open source applications for production by TrueFoundry (github.com)](https://github.com/truefoundry/cognita)
+
+
+
+
+
+上面的大部分开源框架/应用都是自带前端的，部分是基于提供者云端的服务，部分可以自己通过Docker部署。
