@@ -64,7 +64,7 @@ $$
 
 注意力机制的函数可以将查询(query)和键值对(key-value pairs)映射成输出向量。
 
-##### （1）缩放点积注意力(Scaled Dot-Product Attention)
+##### （1）缩放点积注意力(Scaled Dot-Product Attention)—每个头的计算规则
 
 <img src="./assets/scaleddp.png" alt="image-20240606210709807" style="zoom: 67%;" />
 
@@ -118,14 +118,6 @@ $$
 重点注意：QKV实际上是对同一个输入X通过不同的线性层映射得到的
 
 
-
-
-
-##### *详细介绍矩阵的具体维度
-
-矩阵具体维度参考：[图解 transformer——多头注意力（3） 作者：Ketan Doshi翻译：Afunby这是关于图解 transformer 系列的第三篇译文。该系列文章由 Ke... - 雪球 (xueqiu.com)](https://xueqiu.com/3993902801/284754798)
-
-<img src="./assets/qkv.jpg" style="zoom: 80%;" >
 
 
 
@@ -195,5 +187,150 @@ $$
 
 
 
+#### *详细介绍矩阵的具体维度
+
+矩阵具体维度参考：[图解 transformer——多头注意力（3） 作者：Ketan Doshi翻译：Afunby这是关于图解 transformer 系列的第三篇译文。该系列文章由 Ke... - 雪球 (xueqiu.com)](https://xueqiu.com/3993902801/284754798)
+
+##### 输入层
+
+经过<u>词嵌入和位置编码后</u>，<u>进入编码器之前</u>，输入的数据维度为：$B×L×C$（batch_size，seq_length，embedding_size）
+
+其中$B$为batch_size，$L$为seq_length，$C$为embedding_size。
+
+<img src="./assets/input.jpg" alt="img" style="zoom: 80%;" />![img](https://xqimg.imedao.com/18ea35a6aab9e5a3fe8aacbc.jpeg!800.jpg)
+
+为方便理解，以下的图示与介绍中将去掉 batch_size 维度，聚焦于剩下的维度：
+
+<img src="./assets/input_wo_batch.jpg" alt="img" style="zoom:80%;" />
+
+
+
+##### 线性层
+
+之后数据进入编码器，与Query、Key、Value矩阵相乘，如下图所示。
+
+<img src="./assets/qkv.jpg" style="zoom: 80%;" >
+
+这里可以看见，Query、Key、Value矩阵实际上是三个独立的线性层，每个线性层带有不同的权重（**其实是对应论文原文中不同的$W_i^Q,W_i^K,W_i^V$矩阵**）。输入数据分别与三个矩阵相乘，得到矩阵$Q,K,V$.
+
+线性层的维度是：（batch_size, embedding_size, Query_size * n_heads）
+
+Q、K 和 V 矩阵形状是：（batch_size, seq_length, Query_size \* n_heads）
+
+
+
+##### 注意力头切分数据
+
+根据如下的数值关系进行切分：
+$$
+d_q={d_{model}}/{h}\\
+Query\ Size=Embedding\ Size/Number\ of\ heads
+$$
+示意图如下所示：
+
+<img src="./assets/split.jpg" alt="img" style="zoom:80%;" />
+
+基于此，所有 Heads 的计算可通过对一个的矩阵操作来实现，而不需要 N 个单独操作。这使得计算更加有效，同时保持模型的简单：所需线性层更少，同时获得了多头注意力的效果.
+
+**需要注意**：
+
+1. “切分”只是逻辑上的分割。对于参数矩阵 Query, Key, Value 而言，并没有物理切分成对应于每个注意力头的独立矩阵，
+
+2. 逻辑上，每个注意力头对应于 Query, Key, Value 的独立一部分。各注意力头没有单独的线性层，而是所有的注意力头共用线性层，只是不同的注意力头在独属于各自的逻辑部分上进行操作。
+
+
+
+经由线性层输出得到的 Q、K 和 V 矩阵要经过 Reshape 操作，以产生一个 Head 维度。现在每个 "切片 "对应于代表每个头的一个矩阵。以Q矩阵为例：
+
+![img](./assets/reshape.jpg)
+
+第一步首先对其embedding维度进行切分，切成h个头，并将这些切片摞起来。第二步将head 维度和seq_length维度进行交换。这样就会有很多(seq_length, Query Size)的切片。
+
+这一个矩阵变形的过程可以用下面的示意图表示：
+
+<img src="./assets/q_shape.jpg" alt="img" style="zoom: 80%;" />
+
+
+
+##### 为每个头计算注意力
+
+为方便理解，只展示单个 head 的计算，也就是对(seq_length, Query Size)的切片进行计算。
+
+<img src="./assets/qmulk.jpg" alt="img" style="zoom:50%;" />
+
+<img src="./assets/mask.jpg" alt="img" style="zoom:50%;" />
+
+<img src="./assets/softmax.jpg" alt="img" style="zoom: 33%;" />
+
+<img src="./assets/fullqkv.jpg" alt="img" style="zoom:50%;" />
+
+在编码器的自注意力机制中，一个注意力头完整的计算如下所示：
+
+<img src="./assets/fullattention.jpg" alt="img" style="zoom:80%;" />
+
+解码器的自注意力机制中，一个注意力头完整的计算如下所示：
+
+<img src="./assets/decoder.jpg" alt="img" style="zoom:80%;" />
+
+每个注意力头的输出形状为：（batch_size，n_heads，seq_length，Query size）.
+
+注意，实际上此处最后一个维度的大小为 value_size，只是在 Transformer 中的 value_size=key_size=query_size。
+
+
+
+##### 融合每个头的注意力分数
+
+在这一步中要重塑矩阵的尺寸，让其恢复输入数据的尺寸。首先将head 维度和seq_length维度进行交换，得到尺寸（batch_size，seq_length，n_heads，Query_size），然后合并后两个维度，得到（batch_size，seq_length，embedding_size）
+
+<img src="./assets/rechange.jpg" alt="img" style="zoom:80%;" />
+
+
+
+整体上**多头注意力**的计算过程如下：
+
+<img src="./assets/multiheadattention.jpg" alt="img" style="zoom: 80%;" />
+
+
+
+
+
+
+
 ### 二、方法论：为什么要使用注意力机制？
 
+
+
+
+
+
+
+<img src="./assets/tableoftransformer.png" style="zoom: 50%;" >
+
+
+
+
+
+
+
+
+
+### 符号表示的统一
+
+鉴于论文、解析文章以及媒认hw4中的符号表示有所区别，因此在这里制表统一。
+
+|        论文原文        |  媒认课件  | 媒认代码 |             解析文章             |
+| :--------------------: | :--------: | :------: | :------------------------------: |
+|                        | batch_size |          |            batch_size            |
+|                        |  seq_len   |          |            seq_length            |
+|      $d_{model}$       | embed_dim  |          |          embedding_size          |
+|                        | num_heads  |          |             n_heads              |
+|     $d_q/d_k/d_v$      |  head_dim  |          |       query/key/value_size       |
+|                        |            |          |                                  |
+|         Inputs         |            |          |            input = X             |
+|  $W_i^Q/W_i^K/W_i^V$   |            |          |         Query/Key/Value          |
+| $QW_i^Q/KW_i^K/VW_i^V$ |            |          | Q/K/V = Query(X)/Key(X)/Value(X) |
+|                        |            |          |                                  |
+|                        |            |          |                                  |
+|                        |            |          |                                  |
+
+注：①在 Transformer 中的 value_size=key_size=query_size。
