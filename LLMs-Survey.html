@@ -1,0 +1,528 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>LLMs-Survey</title><link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 40px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 32px; padding-right: 32px; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none 0s ease 0s; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; margin-top: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+svg[id^="mermaidChart"] { line-height: 1em; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+mark .md-meta { color: rgb(0, 0, 0); opacity: 0.3 !important; }
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    padding-bottom: .3em;
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+   padding-bottom: .3em;
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border-top: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table tr th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr th:first-child,
+table tr td:first-child {
+    margin-top: 0;
+}
+table tr th:last-child,
+table tr td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    table,
+    pre {
+        page-break-inside: avoid;
+    }
+    pre {
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+.html-for-mac .context-menu {
+    --item-hover-bg-color: #E6F0FE;
+}
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+
+</style>
+</head>
+<body class='typora-export os-windows' >
+<div  id='write'  class = ''><h1><a name="基座模型" class="md-header-anchor"></a><span>基座模型</span></h1><p><a href='https://shmc.tongji.edu.cn/8c/8e/c32676a298126/page.htm'><span>自然语言处理前沿——大语言模型的前世今生 (tongji.edu.cn)</span></a></p><p><span>前身——基于Transformer架构的GPT/BERT等</span></p><p><span>分类：Base模型/Chat模型</span></p><p><img src="./assets/Revolution.png" alt="img" style="zoom: 67%;" /></p><h4><a name="比较领先的大语言模型" class="md-header-anchor"></a><span>比较领先的大语言模型</span></h4><p><span>GPT-4、Claude3、Gemini、Grok、ChatGLM4</span></p><h4><a name="可用的大语言模型众多）" class="md-header-anchor"></a><span>可用的大语言模型（众多）</span></h4><p><span>llama3（8B/70B）——填写问卷申请</span><a href='https://huggingface.co/meta-llama/Meta-Llama-3-8B'><span>meta-llama/Meta-Llama-3-8B · Hugging Face</span></a><span>、</span><a href='https://huggingface.co/meta-llama/Meta-Llama-3-70B'><span>meta-llama/Meta-Llama-3-70B · Hugging Face</span></a></p><p><span>Gemma（7B）——填写问卷申请</span><a href='https://huggingface.co/google/gemma-7b'><span>google/gemma-7b · Hugging Face</span></a></p><p><span>GLM3（6B）——</span><a href='https://github.com/THUDM'><span>THUDM (github.com)</span></a><span>、</span><a href='https://huggingface.co/THUDM'><span>THUDM (Knowledge Engineering Group (KEG) &amp; Data Mining at Tsinghua University) (huggingface.co)</span></a></p><p><span>Phi2（2.7B）——</span><a href='https://huggingface.co/microsoft/phi-2'><span>microsoft/phi-2 · Hugging Face</span></a></p><p>&nbsp;</p><p><span>开源轻量级模型：</span><a href='https://zhuanlan.zhihu.com/p/657476941'><span>1-7B开源小型预训练语言模型整理汇总 - 知乎 (zhihu.com)</span></a></p><p><span>模型汇总：</span><a href='https://www.datalearner.com/ai-models/leaderboard/datalearner-llm-leaderboard'><span>大模型综合评测对比 | 当前主流大模型在各评测数据集上的表现总榜单 | 数据学习 (DataLearner)</span></a></p><p>&nbsp;</p><h3><a name="常用的通用模型" class="md-header-anchor"></a><span>常用的通用模型</span></h3><p><em><span>下面的很多模型都是基于通用模型在具体垂直领域进行微调。</span></em></p><figure><table><thead><tr><th><span>模型</span></th><th><span>大小</span></th><th><span>机构</span></th><th><span>论文</span></th></tr></thead><tbody><tr><td><a href='https://github.com/facebookresearch/llama'><span>LLaMA2</span></a></td><td><span>7B/7B-Chat 13B/13B-Chat 70B/70B-Chat</span></td><td><a href='https://ai.meta.com/'><span>Meta</span></a></td><td><a href='https://arxiv.org/abs/2307.09288'><span>paper</span></a></td></tr><tr><td><a href='https://github.com/THUDM/ChatGLM3'><span>ChatGLM3-6B</span></a></td><td><span>6B-Base/6B/6B-32K</span></td><td><a href='https://github.com/THUDM/ChatGLM3'><span>清华大学</span></a></td><td><a href='https://arxiv.org/abs/2210.02414'><span>paper</span></a></td></tr><tr><td><a href='https://github.com/QwenLM/Qwen'><span>Qwen</span></a></td><td><span>1.8B/1.8B-Chat 7B/7B-Chat 14B/14B-Chat 72B/72B-Chat</span></td><td><a href='https://qianwen.aliyun.com/'><span>阿里云</span></a></td><td><a href='https://arxiv.org/abs/2309.16609'><span>paper</span></a></td></tr><tr><td><a href='https://github.com/baichuan-inc/Baichuan2'><span>Baichuan2</span></a></td><td><span>7B/7B-Chat 13B/13B-Chat</span></td><td><a href='https://www.baichuan-ai.com/home'><span>百川智能</span></a></td><td><a href='https://arxiv.org/abs/2309.10305'><span>paper</span></a></td></tr><tr><td><a href='https://github.com/InternLM/InternLM'><span>InternLM</span></a></td><td><span>7B/7B-Chat 20B/20B-Chat</span></td><td><a href='https://internlm.intern-ai.org.cn/'><span>上海AI实验室</span></a></td><td><a href='https://github.com/InternLM/InternLM-techreport/blob/main/InternLM.pdf'><span>paper</span></a></td></tr></tbody></table></figure><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h1><a name="垂直领域" class="md-header-anchor"></a><span>垂直领域</span></h1><p><span>已经很丰富的整理：</span></p><p><a href='https://github.com/luban-agi/Awesome-Domain-LLM'><span>luban-agi/Awesome-Domain-LLM: 收集和梳理垂直领域的开源模型、数据集及评测基准。 (github.com)</span></a><span>（截至[2023/11/26]）</span></p><p><a href='https://mp.weixin.qq.com/s/ur47_5Zx9IQUUduciEO3jQ'><span>层出不穷的垂域微调大模型非最全汇总：12大领域、57个领域微调模型概述及对垂直行业问答的一些讨论</span></a><span>（截至[2023/09/13]）</span></p><p><a href='https://github.com/lonePatient/awesome-pretrained-chinese-nlp-models'><span>lonePatient/awesome-pretrained-chinese-nlp-models: Awesome Pretrained Chinese NLP Models，高质量中文预训练模型&amp;大模型&amp;多模态模型&amp;大语言模型集合 (github.com)</span></a><span>（截至[2024/05/20]）</span></p><p><a href='https://github.com/DSXiangLi/DecryptPrompt'><span>DSXiangLi/DecryptPrompt: 总结Prompt&amp;LLM论文，开源数据&amp;模型，AIGC应用 (github.com)</span></a></p><h3 align="center">----整理----</h3><h3><a name="医疗领域" class="md-header-anchor"></a><span>医疗领域</span></h3><p><strong><span>中文医疗知识/对话/教育</span></strong><span>：</span><a href='https://github.com/XZhang97666/AlpaCare'><span>AlpaCare</span></a><span> 、</span><strong><a href='https://github.com/SCIR-HI/Huatuo-Llama-Med-Chinese'><span>BenTsao(本草)</span></a></strong><span>、</span><a href='https://github.com/scutcyr/BianQue'><span>BianQue(扁鹊)</span></a><span>、</span><strong><a href='https://github.com/WangRongsheng/CareGPT'><span>CareGPT</span></a></strong><span>、</span><a href='https://github.com/michael-wzhu/ChatMed'><span>ChatMed</span></a><span>、</span><a href='https://github.com/synlp/ChiMed-GPT'><span>ChiMed-GPT</span></a><span>、</span><strong><a href='https://github.com/Facico/Chinese-Vicuna'><span>Chinese-vicuna-med</span></a></strong><span>、</span><a href='https://github.com/FudanDISC/DISC-MedLLM'><span>DISC-MedLLM</span></a><span>、</span><strong><a href='https://github.com/xionghonglin/DoctorGLM'><span>DoctorGLM</span></a></strong><span>、</span><strong><a href='https://github.com/FreedomIntelligence/HuatuoGPT'><span>HuatuoGPT(华佗)</span></a></strong><span>、</span><a href='https://github.com/WangRongsheng/IvyGPT'><span>IvyGPT</span></a><span>、</span><strong><a href='https://github.com/shibing624/MedicalGPT'><span>MedicalGPT</span></a></strong><span>、</span><strong><a href='https://github.com/SCIR-HI/Med-ChatGLM'><span>Med-ChatGLM</span></a></strong><span>、</span><strong><a href='https://github.com/MediaBrain-SJTU/MING'><span>MING</span></a></strong><span>、</span><a href='https://github.com/openmedlab/PULSE'><span>PULSE</span></a><span>、</span><strong><a href='https://github.com/CMKRG/QiZhenGPT'><span>QiZhenGPT</span></a></strong><span>、</span><a href='https://github.com/winninghealth/WiNGPT2'><span>WiNGPT2</span></a><span>、</span><a href='https://github.com/thomas-yanxin/Sunsimiao'><span>Sunsimiao (孙思邈)</span></a><span>、</span></p><p><strong><span>英文医疗知识/对话</span></strong><span>：</span><strong><a href='https://github.com/Kent0n-Li/ChatDoctor'><span>ChatDoctor</span></a></strong><span>、</span><a href='https://github.com/kbressem/medAlpaca'><span>medAlpaca</span></a><span>、</span><a href='https://github.com/CogStack/OpenGPT/tree/main'><span>NHS-LLM</span></a><span>、</span><strong><a href='https://github.com/chaoyi-wu/PMC-LLaMA'><span>PMC-LLaMA</span></a></strong><span>、</span></p><p><strong><span>中医知识</span></strong><span>：</span><a href='https://github.com/Zlasejd/HuangDI'><span>HuangDI (皇帝)</span></a><span> 、</span><a href='https://github.com/michael-wzhu/ShenNong-TCM-LLM'><span>ShenNong-TCM-LLM (神农)</span></a><span>、</span><a href='https://github.com/2020MEAI/TCMLLM'><span>TCMLLM</span></a><span>、</span><a href='https://github.com/pariskang/CMLM-ZhongJing'><span>ZhongJing (仲景)</span></a><span>、</span><a href='https://github.com/SupritYoung/Zhongjing'><span>Zhongjing-LLaMA (仲景)</span></a><span>、</span></p><p><strong><span>心理健康</span></strong><span>：</span><a href='https://github.com/EmoCareAI/ChatPsychiatrist'><span>ChatPsychiatrist</span></a><span>、</span><a href='https://github.com/SteveKGYang/MentalLLaMA'><span>MentalLLaMA</span></a><span>、</span><a href='https://github.com/qiuhuachuan/smile'><span>MeChat</span></a><span>、</span><a href='https://github.com/X-D-Lab/MindChat'><span>MindChat (漫谈)</span></a></p><p><strong><span>生物医学</span></strong><span>：</span><strong><a href='https://github.com/PharMolix/OpenBioMed'><span>OpenBioMed</span></a></strong><span>(多模态)、</span><a href='https://github.com/scutcyr/SoulChat'><span>SoulChat (灵心)</span></a><span>、</span><a href='https://github.com/DUTIR-BioNLP/Taiyi-LLM'><span>Taiyi (太一)</span></a><span> </span></p><p><strong><span>胸部光片</span></strong><span>：</span><strong><a href='https://github.com/WangRongsheng/XrayGLM '><span>XrayGLM</span></a></strong></p><p><strong><span>儿童陪伴</span></strong><span>：</span><a href='https://github.com/HIT-SCIR-SC/QiaoBan'><span>QiaoBan (巧板)</span></a><span> </span></p><p>&nbsp;</p><h3><a name="金融领域" class="md-header-anchor"></a><span>金融领域</span></h3><p><strong><span>知识问答/场景分析/计算检索</span></strong><span>：</span><a href='https://github.com/ssymmetry/BBT-FinCUGE-Applications'><span>BBT-FinCUGE-Applications</span></a><span>、</span><a href='https://github.com/TongjiFinLab/CFGPT'><span>CFGPT</span></a><span>、</span><a href='https://sota.jiqizhixin.com/project/deepmoney'><span>DeepMoney</span></a><span>、</span><a href='https://github.com/FudanDISC/DISC-FinLLM'><span>DISC-FinLLM</span></a><span>、</span><a href='https://github.com/chancefocus/PIXIU'><span>PIXIU (貔貅)</span></a><span>、</span><strong><a href='https://modelscope.cn/models/TongyiFinance/Tongyi-Finance-14B/summary'><span>Tongyi-Finance-14B</span></a></strong><span>、</span><strong><a href='https://github.com/jerry1993-tech/Cornucopia-LLaMA-Fin-Chinese'><span>Cornucopia (聚宝盆)</span></a></strong><span> 、</span><strong><a href='https://github.com/Duxiaoman-DI/XuanYuan'><span>XuanYuan (轩辕)</span></a></strong><span>、</span><a href='https://huggingface.co/xyz-nlp/XuanYuan2.0'><span>XuanYuan2.0 </span></a></p><p><strong><span>英文</span></strong><span>：</span><a href='https://github.com/SALT-NLP/FLANG'><span>FLANG</span></a><span>、</span><a href='https://github.com/AbaciNLP/InvestLM'><span>InvestLM</span></a><span>、</span><a href='https://github.com/ant-research/fin_domain_llm'><span>WeaverBird (织工鸟)</span></a><span>(双语对话)、</span></p><p><strong><span>其他</span></strong><span>：</span><strong><a href='https://github.com/MetaGLM/FinGLM'><span>FinGLM</span></a></strong><span>(解析上市公司年报)、</span><strong><a href='https://github.com/AI4Finance-Foundation/FinGPT'><span>FinGPT</span></a></strong><span>(多个金融大模型)、</span><a href='https://github.com/AbaciNLP/InvestLM'><span>InvestLM</span></a><span>(金融考试、投资问题等)、</span></p><p>&nbsp;</p><h3><a name="法律领域" class="md-header-anchor"></a><span>法律领域</span></h3><p><strong><span>法律服务/知识</span></strong><span>：</span><strong><a href='https://github.com/PKU-YuanGroup/ChatLaw'><span>ChatLaw</span></a></strong><span>、</span><a href='https://github.com/FudanDISC/DISC-LawLLM'><span>DISC-LawLLM</span></a><span>、</span><a href='https://github.com/irlab-sdu/fuzi.mingcha'><span>夫子•明察</span></a><span>、</span><a href='https://github.com/seudl/JurisLMs'><span>JurisLMs</span></a><span>、</span><strong><a href='https://github.com/pengxiao-song/LaWGPT'><span>LaWGPT</span></a></strong><span> 、</span><strong><a href='https://github.com/LiuHC0428/LAW-GPT'><span>LawGPT_zh (獬豸)</span></a></strong><span>、</span><strong><a href='https://github.com/AndrewZhe/lawyer-llama'><span>Lawyer LLaMA</span></a></strong><span>、</span><strong><a href='https://github.com/CSHaitao/LexiLaw'><span>LexiLaw</span></a></strong><span>、</span><a href='https://github.com/davidpig/lychee_law'><span>Lychee (律知)</span></a><span>、</span><a href='https://github.com/siat-nlp/HanFei'><span>HanFei (韩非)</span></a><span> 、</span><a href='https://github.com/zhihaiLLM/wisdomInterrogatory'><span>wisdomInterrogatory (智海-录问)</span></a><span>、</span><strong><a href='https://github.com/Duxiaoman-DI/XuanYuan'><span>XuanYuan</span></a></strong></p><p>&nbsp;</p><h3><a name="编程领域" class="md-header-anchor"></a><span>编程领域</span></h3><p><strong><span>代码</span></strong><span>：</span><strong><a href='https://github.com/FlagAI-Open/FlagAI/tree/master/examples/Aquila'><span>Aquila</span></a></strong><span>、</span><a href='https://github.com/cubenlp/ChatSQL'><span>ChatSQL</span></a><span>、</span><strong><a href='http://keg.cs.tsinghua.edu.cn/codegeex/index_zh.html'><span>codegeex</span></a></strong><span>、</span><strong><a href='https://github.com/THUDM/CodeGeeX2'><span>codegeex2</span></a></strong><span>、</span><strong><a href='https://huggingface.co/google/codegemma-7b'><span>codegemma-7b</span></a></strong><span>、</span><strong><a href='https://github.com/facebookresearch/codellama'><span>codellama</span></a></strong><span>、</span><strong><a href='https://hf-mirror.com/Qwen/CodeQwen1.5-7B-Chat'><span>CodeQwen1.5-7B-Chat</span></a></strong><span>、</span><strong><a href='https://github.com/WisdomShell/codeshell'><span>codeshell</span></a></strong><span>、</span><strong><a href='https://github.com/deepseek-ai/DeepSeek-Coder'><span>DeepSeek-Coder</span></a></strong><span>、</span><strong><a href='https://github.com/deepseek-ai/DeepSeek-MoE'><span>DeepSeekMoE</span></a></strong><span>、</span><strong><a href='https://github.com/codefuse-ai/MFTCoder'><span>MFTCoder</span></a></strong><span>、</span><a href='https://stability.ai/blog/stablecode-llm-generative-ai-coding'><span>stabelcode</span></a><span>、</span><strong><a href='https://github.com/defog-ai/sqlcoder'><span>SQLCoder</span></a></strong><span>、</span><strong><a href='https://github.com/bigcode-project/starcoder'><span>Starcoder</span></a></strong><span>、</span><a href='https://github.com/microsoft/WaveCoder'><span>WaveCoder</span></a></p><p>&nbsp;</p><h3><a name="教育领域" class="md-header-anchor"></a><span>教育领域</span></h3><p><strong><span>教育服务</span></strong><span>：</span><strong><a href='https://github.com/icalk-nlp/EduChat'><span>EduChat</span></a></strong><span>、</span><a href='https://huggingface.co/lightyear-turing/TuringMM-34B-Chat'><span>TuringMM-34B-Chat</span></a></p><p><strong><span>国际中文教育</span></strong><span>：</span><a href='https://github.com/blcuicall/taoli'><span>桃李 (Taoli)</span></a></p><p>&nbsp;</p><h3><a name="数学领域" class="md-header-anchor"></a><span>数学领域</span></h3><p><strong><span>讲题</span></strong><span>：</span><a href='https://www.mathgpt.com/'><span>MathGPT</span></a></p><p><strong><span>解决问题</span></strong><span>：</span><a href='https://tiger-ai-lab.github.io/MAmmoTH/'><span>MammoTH</span></a><span>、</span><a href='https://github.com/meta-math/MetaMath'><span>MetaMath</span></a><span>、</span><a href='https://huggingface.co/Skywork/Skywork-13B-Math'><span>Skywork-13B-Math</span></a><span>、</span><strong><a href='https://github.com/nlpxucan/WizardLM/tree/main/WizardMath'><span>WizardMath</span></a></strong></p><p>&nbsp;</p><h3><a name="其他领域" class="md-header-anchor"></a><span>其他领域</span></h3><p><strong><span>化学</span></strong><span>：</span><a href='https://huggingface.co/OpenDFM/ChemDFM-13B-v1.0'><span>OpenDFM/ChemDFM-13B-v1.0</span></a></p><p><strong><span>地球科学</span></strong><span>：</span><a href='https://github.com/davendw49/k2'><span>K2</span></a></p><p><strong><span>植物科学</span></strong><span>：</span><a href='https://github.com/Xianjun-Yang/PLLaMa'><span>PLLaMa</span></a></p><p><strong><span>天文学</span></strong><span>：</span><a href='https://github.com/Yu-Yang-Li/StarWhisper'><span>StarWhisper (星语)</span></a></p><p><strong><span>海洋学</span></strong><span>：</span><a href='https://github.com/hkust-vgd/MarineGPT'><span>MarineGPT</span></a><span>(熟悉海洋动物知识，能识图)、</span><a href='https://arxiv.org/abs/2310.02031'><span>OceanGPT</span></a><span>(海洋学领域专家)</span></p><p>&nbsp;</p><p><strong><span>农业</span></strong><span>：</span><a href='https://github.com/AgriGPTs/AgriGPTs'><span>AgriGPT</span></a></p><p><strong><span>自媒体</span></strong><span>：</span><a href='https://github.com/IMOSR/MediaGPT'><span>MediaGPT</span></a></p><p><strong><span>电商</span></strong><span>：</span><a href='https://github.com/Alibaba-NLP/EcomGPT'><span>EcomGPT</span></a></p><p>&nbsp;</p><p><strong><span>网络安全</span></strong><span>：</span><a href='https://github.com/ddzipp/AutoAudit'><span>AutoAudit</span></a><span>、</span><strong><a href='https://github.com/Clouditera/secgpt'><span>SecGPT</span></a></strong></p><p><strong><span>科技</span></strong><span>：</span><a href='https://github.com/gmftbyGMFTBY/science-llm'><span>Mozi (墨子)</span></a><span>(科技文献)、</span><a href='https://github.com/neukg/TechGPT'><span>TechGPT</span></a><span>(众多垂直领域)</span></p><p><strong><span>交通</span></strong><span>：</span><strong><a href='https://github.com/DUOMO/TransGPT'><span>TransGPT (致远)</span></a></strong><span>(通用常识交通大模型)</span></p><p>&nbsp;</p><p><strong><span>故事生成</span></strong><span>：</span><strong><a href='https://github.com/BlinkDL/ChatRWKV'><span>ChatRWKV</span></a></strong></p><p><strong><span>音乐生成</span></strong><span>：</span><strong><a href='https://huggingface.co/facebook/musicgen-medium'><span>facebook/musicgen-medium</span></a></strong></p><p>&nbsp;</p><p><strong><span>评估模型</span></strong><span>：</span><a href='https://modelscope.cn/models/lockonlvange/autoj-13b-fp16/summary'><span> Auto-J</span></a><span>、</span><strong><a href='https://github.com/baaivision/JudgeLM'><span> JudgeLM</span></a></strong></p><p>&nbsp;</p><p><strong><span>运维</span></strong><span>：</span><strong><a href='https://github.com/codefuse-ai/CodeFuse-DevOps-Model'><span>DevOps-Model</span></a></strong><span>、</span><a href='https://github.com/HC-Guo/Owl'><span>OWL</span></a></p><p><strong><span>舆情安全</span></strong><span>：</span><strong><a href='https://github.com/wenge-research/YaYi'><span>YaYi (雅意)</span></a></strong><span>(覆盖媒体宣传、舆情分析、公共安全、金融风控、城市治理等五大领域)</span></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p><span>更杂的一些工具：</span></p><figure><table><thead><tr><th><span>工具描述</span></th><th><span>链接</span></th></tr></thead><tbody><tr><td><span>GPT4v-ACT：基于JS DOM识别网页元素，服务于各类多模态webagent</span></td><td><a href='https://github.com/ddupont808/GPT-4V-Act?tab=readme-ov-file' target='_blank' class='url'>https://github.com/ddupont808/GPT-4V-Act?tab=readme-ov-file</a></td></tr><tr><td><span>Deep-KE：基于LLM对数据进行智能解析实现知识抽取</span></td><td><a href='https://github.com/zjunlp/DeepKE' target='_blank' class='url'>https://github.com/zjunlp/DeepKE</a></td></tr><tr><td><span>IncarnaMind：多文档RAG方案，动态chunking的方案可以借鉴</span></td><td><a href='https://github.com/junruxiong/IncarnaMind' target='_blank' class='url'>https://github.com/junruxiong/IncarnaMind</a></td></tr><tr><td><span>Vectra：平台化的LLM Agent搭建方案，从索引构建，内容召回排序，到事实检查的LLM生成</span></td><td><a href='https://vectara.com/tour-vectara/' target='_blank' class='url'>https://vectara.com/tour-vectara/</a></td></tr><tr><td><span>Data-Copilot：时间序列等结构化数据分析领域的Agent解决方案</span></td><td><a href='https://github.com/zwq2018/Data-Copilot' target='_blank' class='url'>https://github.com/zwq2018/Data-Copilot</a></td></tr><tr><td><span>DB-GPT: 以数据库为基础的GPT实验项目，使用本地化的GPT大模型与您的数据和环境进行交互</span></td><td><a href='https://db-gpt.readthedocs.io/projects/db-gpt-docs-zh-cn/zh_CN/latest/index.html' target='_blank' class='url'>https://db-gpt.readthedocs.io/projects/db-gpt-docs-zh-cn/zh_CN/latest/index.html</a></td></tr><tr><td><span>guardrails：降低模型幻觉的python框架，promp模板+validation+修正</span></td><td><a href='https://github.com/shreyar/guardrails' target='_blank' class='url'>https://github.com/shreyar/guardrails</a></td></tr><tr><td><span>guidance：微软新开源框架，同样是降低模型幻觉的框架，prompt+chain的升级版加入逐步生成和思维链路</span></td><td><a href='https://github.com/guidance-ai/guidance' target='_blank' class='url'>https://github.com/guidance-ai/guidance</a></td></tr><tr><td><span>SolidGPT: 上传个人数据，通过命令交互创建项目PRD等</span></td><td><a href='https://github.com/AI-Citizen/SolidGPT' target='_blank' class='url'>https://github.com/AI-Citizen/SolidGPT</a></td></tr><tr><td><span>HR-Agent: 类似HR和员工交互，支持多工具调用</span></td><td><a href='https://github.com/stepanogil/autonomous-hr-chatbot' target='_blank' class='url'>https://github.com/stepanogil/autonomous-hr-chatbot</a></td></tr><tr><td><span>BambooAI：数据分析Agent</span></td><td><a href='https://github.com/pgalko/BambooAI' target='_blank' class='url'>https://github.com/pgalko/BambooAI</a></td></tr><tr><td><span>AlphaCodium：通过Flow Engineering完成代码任务</span></td><td><a href='https://github.com/Codium-ai/AlphaCodium' target='_blank' class='url'>https://github.com/Codium-ai/AlphaCodium</a></td></tr><tr><td><span>REOR: AI驱动的笔记软件</span></td><td><a href='https://github.com/reorproject/reor' target='_blank' class='url'>https://github.com/reorproject/reor</a></td></tr><tr><td><span>Vanna.AI: chat with sql database</span></td><td><a href='https://vanna.ai/' target='_blank' class='url'>https://vanna.ai/</a></td></tr><tr><td><span>ScrapeGraph：融合了图逻辑和LLM</span></td><td><a href='https://scrapegraph-doc.onrender.com/' target='_blank' class='url'>https://scrapegraph-doc.onrender.com/</a></td></tr><tr><td><span>OpenAct：Adapt-AI推出了的和桌面GUI交互的Agent框架</span></td><td><a href='https://github.com/OpenAdaptAI/OpenAdapt' target='_blank' class='url'>https://github.com/OpenAdaptAI/OpenAdapt</a></td></tr><tr><td><span>LaVague：WebAgent框架，偏低层指令交互性把指令转换成Selenium代码去和网页交互</span></td><td><a href='https://github.com/lavague-ai/LaVague/tree/main' target='_blank' class='url'>https://github.com/lavague-ai/LaVague/tree/main</a></td></tr><tr><td><span>Tarsier: webagent的辅助工具把网站转换成可交互元素序号和描述</span></td><td><a href='https://github.com/reworkd/tarsier?tab=readme-ov-file' target='_blank' class='url'>https://github.com/reworkd/tarsier?tab=readme-ov-file</a></td></tr><tr><td><span>RecAI：微软推出的推荐领域LLM Agent</span></td><td><a href='https://github.com/microsoft/RecAI' target='_blank' class='url'>https://github.com/microsoft/RecAI</a></td></tr></tbody></table></figure><p>&nbsp;</p><h3><a name="diffusion-models" class="md-header-anchor"></a><span>Diffusion Models</span></h3><h4><a name="图像" class="md-header-anchor"></a><span>图像</span></h4><p><strong><span>DALL-E 2</span></strong><span>：</span><a href='https://github.com/openai/DALL-E'><span>openai/DALL-E: PyTorch package for the discrete VAE used for DALL·E. (github.com)</span></a></p><p><strong><span>Stable Diffusion</span></strong><span>：</span><a href='https://github.com/Stability-AI/StableDiffusion'><span>Stability-AI/stablediffusion: High-Resolution Image Synthesis with Latent Diffusion Models (github.com)</span></a></p><p><strong><span>Disco Diffusion</span></strong><span>：</span><a href='https://github.com/alembics/disco-diffusion'><span>Alembics/Disco-diffusion (github.com)</span></a></p><p><strong><span>DDPM</span></strong><span>：</span><a href='https://github.com/hojonathanho/diffusion'><span>hojonathanho/diffusion: Denoising Diffusion Probabilistic Models (github.com)</span></a></p><p><strong><span>GLIDE</span></strong><span>：</span><a href='https://github.com/openai/glide-text2im'><span>openai/glide-text2im: GLIDE: a diffusion-based text-conditional image synthesis model (github.com)</span></a></p><p><span>在Hugging Face上有很多开源扩散模型，也有很多基于LoRA的微调。</span></p><h4><a name="音频" class="md-header-anchor"></a><span>音频</span></h4><p><strong><span>WaveGrad</span></strong><span>：</span><a href='https://github.com/ivanvovk/WaveGrad'><span>ivanvovk/WaveGrad: Implementation of WaveGrad high-fidelity vocoder from Google Brain in PyTorch. (github.com)</span></a></p><p><strong><span>DiffWave</span></strong><span>：</span><a href='https://github.com/lmnt-com/diffwave'><span>lmnt-com/diffwave: DiffWave is a fast, high-quality neural vocoder and waveform synthesizer. (github.com)</span></a></p><p>&nbsp;</p><h3><a name="音频处理" class="md-header-anchor"></a><span>音频处理</span></h3><p><span>主要是基于wav2vec、HUBERT之类的模型。</span></p><p><a href='https://github.com/lmnt-com/diffwave'><span>lmnt-com/diffwave: DiffWave is a fast, high-quality neural vocoder and waveform synthesizer. (github.com)</span></a></p><p><a href='https://huggingface.co/facebook/wav2vec2-large-xlsr-53'><span>facebook/wav2vec2-large-xlsr-53 · Hugging Face</span></a></p><p><a href='https://huggingface.co/facebook/hubert-base-ls960'><span>facebook/hubert-base-ls960 · Hugging Face</span></a></p><p><a href='https://huggingface.co/TencentGameMate/chinese-wav2vec2-base'><span>TencentGameMate/chinese-wav2vec2-base · Hugging Face</span></a></p><p><a href='https://huggingface.co/TencentGameMate/chinese-hubert-base'><span>TencentGameMate/chinese-hubert-base · Hugging Face</span></a></p><p>&nbsp;</p><h3><a name="多模态" class="md-header-anchor"></a><span>多模态</span></h3><figure><table><thead><tr><th><span>模型</span></th><th><span>大小</span></th><th><span>时间</span></th><th><span>语言模型</span></th><th><span>非语言模型</span></th><th style='text-align:center;' ><span>语言</span></th><th><span>领域</span></th><th><span>下载</span></th><th><span>项目地址</span></th><th><span>机构/个人</span></th><th><span>文献</span></th></tr></thead><tbody><tr><td><span>HunyuanDiT</span></td><td><span>1.5B</span></td><td><span>2024-05</span></td><td><span>multilingual T5 encoder</span></td><td><span>CLIP</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>文图</span></td><td><a href='https://hf-mirror.com/Tencent-Hunyuan/HunyuanDiT'><span>🤗</span></a></td><td><strong><a href='https://github.com/Tencent/HunyuanDiT'><span>HunyuanDiT</span></a></strong></td><td><a href='https://github.com/Tencent'><span>Tencent</span></a></td><td><a href='https://arxiv.org/abs/2405.08748'><span>Paper</span></a></td></tr><tr><td><strong><span>CogVLM2</span></strong></td><td>&nbsp;</td><td><span>2024-05</span></td><td><span>Meta-Llama-3-8B-Instruct</span></td><td><span>/</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>文图</span></td><td><a href='https://hf-mirror.com/THUDM/cogvlm2-llama3-chat-19B'><span>🤗</span></a></td><td><a href='https://github.com/THUDM/CogVLM'><span>CogVLM</span></a></td><td><a href='https://github.com/THUDM#start-of-content'><span>Skip to content</span></a></td><td>&nbsp;</td></tr><tr><td><span>360VL</span></td><td><span>8/70B</span></td><td><span>2024-05</span></td><td><span>LLama3</span></td><td><span>CLIP-ViT</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>文图</span></td><td><a href='https://hf-mirror.com/qihoo360'><span>🤗</span></a></td><td><a href='https://github.com/360CVGroup/360VL'><span>360VL</span></a></td><td><a href='https://github.com/360CVGroup'><span>360CVGroup</span></a></td><td>&nbsp;</td></tr><tr><td><strong><span>XVERSE-V</span></strong></td><td><span>13B</span></td><td><span>2024-05</span></td><td><strong><span>XVERSE-13B-Chat</span></strong></td><td><strong><span>clip-vit-large-patch14-224</span></strong></td><td style='text-align:center;' ><span>中英</span></td><td><span>文图</span></td><td><a href='https://modelscope.cn/models/xverse/XVERSE-V-13B/summary'><span>🤖</span></a></td><td><a href='https://github.com/xverse-ai/XVERSE-V-13B'><span>XVERSE-V-13B</span></a></td><td><a href='https://github.com/xverse-ai'><span>xverse-ai</span></a></td><td>&nbsp;</td></tr><tr><td><span>MiniCPM-V 2.0</span></td><td><span>2.8B</span></td><td><span>2024-04</span></td><td><a href='https://github.com/OpenBMB/MiniCPM/'><span>MiniCPM-2.4B</span></a></td><td><span>SigLip-400M</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>文图</span></td><td><a href='https://huggingface.co/openbmb/OmniLMM-12B/'><span>🤗</span></a><span> </span><a href='http://120.92.209.146:8081/'><span>🤖</span></a></td><td><strong><a href='https://github.com/OpenBMB/MiniCPM-V'><span>MiniCPM-V</span></a></strong></td><td><a href='https://github.com/OpenBMB'><span>OpenBMB</span></a></td><td><a href='https://openbmb.vercel.app/minicpm-v-2'><span>Blog</span></a></td></tr><tr><td><strong><span>Qwen-Audio</span></strong></td><td><span>7B</span></td><td><span>2024-03</span></td><td><a href='https://github.com/QwenLM/Qwen'><span>Qwen-7B</span></a></td><td><a href='https://github.com/openai/whisper'><span>Whisper-large-v2</span></a></td><td style='text-align:center;' ><span>中英</span></td><td><span>文音</span></td><td><a href='https://huggingface.co/Qwen/Qwen-Audio'><span>🤗HF</span></a></td><td><a href='https://github.com/QwenLM/Qwen-Audio'><span>Qwen-Audio</span></a><span> </span><a href='https://camo.githubusercontent.com/25f379bc6f888c51a2d24a08581d08e56f750e4e2b8a948a51cca8a763b756bf/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f5177656e4c4d2f5177656e2d417564696f2e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/25f379bc6f888c51a2d24a08581d08e56f750e4e2b8a948a51cca8a763b756bf/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f5177656e4c4d2f5177656e2d417564696f2e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/QwenLM'><span>Qwen</span></a></td><td><a href='http://arxiv.org/abs/2311.07919'><span>Paper</span></a></td></tr><tr><td><span>DeepSeek-VL</span></td><td><span>1.3/7B</span></td><td><span>2024-03</span></td><td><span>DeepSeek</span></td><td><span>SigLip/SAM</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>图文</span></td><td><a href='https://huggingface.co/deepseek-ai/deepseek-vl-7b-chat'><span>🤗HF</span></a></td><td><a href='https://github.com/deepseek-ai/DeepSeek-VL'><span>DeepSeek-VL</span></a><a href='https://camo.githubusercontent.com/37db0286c0346b5c339df33d5e20d6400b80fb90027627ccca705481f23b47aa/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f646565707365656b2d61692f446565705365656b2d564c2e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/37db0286c0346b5c339df33d5e20d6400b80fb90027627ccca705481f23b47aa/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f646565707365656b2d61692f446565705365656b2d564c2e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/deepseek-ai'><span>deepseek-ai</span></a></td><td><a href='https://arxiv.org/abs/2403.05525'><span>Paper</span></a></td></tr><tr><td><strong><span>OmniLMM</span></strong></td><td><span>3/12B</span></td><td><span>2024-02</span></td><td><span>MiniCPM</span></td><td><span>SigLip</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>图文</span></td><td><a href='https://huggingface.co/openbmb/MiniCPM-V'><span>🤗HF</span></a></td><td><a href='https://github.com/OpenBMB/OmniLMM'><span>OmniLMM</span></a><a href='https://camo.githubusercontent.com/4b2ca65767fd99b80b456d63a645d3c9f3aa134f1e2e65c611b98cc84c5a2730/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f4f70656e424d422f4f6d6e694c4d4d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/4b2ca65767fd99b80b456d63a645d3c9f3aa134f1e2e65c611b98cc84c5a2730/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f4f70656e424d422f4f6d6e694c4d4d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/01-ai'><span>[OpenBMB](https://github.com/OpenBMB)</span></a></td><td>&nbsp;</td></tr><tr><td><strong><span>MiniCPM-V</span></strong></td><td><span>3B</span></td><td><span>2024-02</span></td><td><span>MiniCPM-2.4B</span></td><td><span>SigLip-400M</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>图文</span></td><td><a href='https://huggingface.co/openbmb/MiniCPM-V'><span>🤗HF</span></a></td><td><a href='https://github.com/OpenBMB/OmniLMM'><span>OmniLMM</span></a><a href='https://camo.githubusercontent.com/4b2ca65767fd99b80b456d63a645d3c9f3aa134f1e2e65c611b98cc84c5a2730/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f4f70656e424d422f4f6d6e694c4d4d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/4b2ca65767fd99b80b456d63a645d3c9f3aa134f1e2e65c611b98cc84c5a2730/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f4f70656e424d422f4f6d6e694c4d4d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/01-ai'><span>[OpenBMB](https://github.com/OpenBMB)</span></a></td><td>&nbsp;</td></tr><tr><td><span>Yi-VL</span></td><td><span>6/34B</span></td><td><span>2024-01</span></td><td><span>Yi</span></td><td><a href='https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K'><span>CLIP-VIT</span></a></td><td style='text-align:center;' ><span>中英</span></td><td><span>图文</span></td><td><span>[</span><a href='https://huggingface.co/01-ai'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/01-ai/Yi'><span>Yi</span></a><a href='https://camo.githubusercontent.com/e585cd714fa72a4b7ebeee2f7df2998b339a63783fbd15eaec2649ec58db7de0/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f30312d61692f59692e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/e585cd714fa72a4b7ebeee2f7df2998b339a63783fbd15eaec2649ec58db7de0/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f30312d61692f59692e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/01-ai'><span>01-ai</span></a></td><td>&nbsp;</td></tr><tr><td><span>Lyrics</span></td><td><span>14B</span></td><td><span>2023-12</span></td><td><span>/</span></td><td><span>/</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>图文</span></td><td><span>[</span><a href='https://huggingface.co/IDEA-CCNL/Ziya-Visual-Lyrics-14B'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/IDEA-CCNL/Fengshenbang-LM'><span>Fengshenbang-LM</span></a></td><td><a href='https://github.com/IDEA-CCNL'><span>IDEA研究院</span></a></td><td>&nbsp;</td></tr><tr><td><span>Qwen-Audio</span></td><td><span>7B</span></td><td><span>2023-12</span></td><td><a href='https://github.com/QwenLM/Qwen'><span>Qwen-7B</span></a></td><td><a href='https://github.com/openai/whisper'><span>Whisper-large-v2</span></a></td><td style='text-align:center;' ><span>中英</span></td><td><span>文音</span></td><td><span>[</span><a href='https://huggingface.co/Qwen'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/QwenLM/Qwen-Audio'><span>Qwen-Audio</span></a><a href='https://camo.githubusercontent.com/25f379bc6f888c51a2d24a08581d08e56f750e4e2b8a948a51cca8a763b756bf/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f5177656e4c4d2f5177656e2d417564696f2e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/25f379bc6f888c51a2d24a08581d08e56f750e4e2b8a948a51cca8a763b756bf/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f5177656e4c4d2f5177656e2d417564696f2e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/QwenLM'><span>Qwen</span></a></td><td><a href='http://arxiv.org/abs/2311.07919'><span>Paper</span></a></td></tr><tr><td><span>SPHINX</span></td><td><span>13B</span></td><td><span>2023-10</span></td><td><span>/</span></td><td><span>/</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>图文</span></td><td><span>[</span><a href='https://huggingface.co/Alpha-VLLM/SPHINX'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/Alpha-VLLM/LLaMA2-Accessory'><span>LLaMA2-Accessory</span></a><a href='https://camo.githubusercontent.com/241fbaad3f8561a8dfb08b1619a7a008a3b6c1c22e27f1207ed4d376697e84a1/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f416c7068612d564c4c4d2f4c4c614d41322d4163636573736f72792e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/241fbaad3f8561a8dfb08b1619a7a008a3b6c1c22e27f1207ed4d376697e84a1/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f416c7068612d564c4c4d2f4c4c614d41322d4163636573736f72792e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/Alpha-VLLM'><span>Alpha-VLLM</span></a></td><td>&nbsp;</td></tr><tr><td><span>Skywork-MM</span></td><td><span>13B</span></td><td><span>2023-10</span></td><td><span>/</span></td><td><span>/</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>图文</span></td><td><span>[</span><a href='https://huggingface.co/Skywork'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/SkyworkAI/Skywork'><span>Skywork</span></a></td><td><a href='https://github.com/SkyworkAI'><span>SkyworkAI</span></a></td><td><a href='https://github.com/will-singularity/Skywork-MM/blob/main/skywork_mm.pdf'><span>Paper</span></a></td></tr><tr><td><span>CogVLM</span></td><td><span>7/14B</span></td><td><span>2023-10</span></td><td><span>Qwen</span></td><td><span>ViT</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>图文</span></td><td><span>[</span><a href='https://huggingface.co/CausalLM'><span>🤗HF</span><span>]</span></a></td><td><span>/</span></td><td><a href='https://huggingface.co/CausalLM'><span>CausalLM</span></a></td><td>&nbsp;</td></tr><tr><td><span>fuyu</span></td><td><span>8B</span></td><td><span>2023-10</span></td><td><span>/</span></td><td><span>/</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>图文</span></td><td><span>[</span><a href='https://huggingface.co/adept/fuyu-8b'><span>🤗HF</span><span>]</span></a></td><td><span>/</span></td><td><a href='https://huggingface.co/adept'><span>Adept AI Labs</span></a></td><td><a href='https://www.adept.ai/blog/fuyu-8b'><span>Blog</span></a></td></tr><tr><td><span>Ziya-Visual</span></td><td><span>14B</span></td><td><span>2023-10</span></td><td><span>LLaMA</span></td><td><span>InstructBLIP</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>图文</span></td><td><span>[</span><a href='https://huggingface.co/IDEA-CCNL/Ziya-Visual-14B-Chat'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/IDEA-CCNL/Fengshenbang-LM'><span>Fengshenbang-LM</span></a><a href='https://camo.githubusercontent.com/4ee89147e5a01c2ab460325935c0bbd84160eb94372ddc7ed9047a16597e9689/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f494445412d43434e4c2f46656e677368656e62616e672d4c4d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/4ee89147e5a01c2ab460325935c0bbd84160eb94372ddc7ed9047a16597e9689/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f494445412d43434e4c2f46656e677368656e62616e672d4c4d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/IDEA-CCNL'><span>IDEA研究院</span></a></td><td><a href='https://arxiv.org/abs/2310.08166'><span>Paper</span></a></td></tr><tr><td><span>CogVLM</span></td><td><span>17B</span></td><td><span>2023-10</span></td><td><span>EVA2-CLIP-E</span></td><td><span>Vicuna-v1.5</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>图文</span></td><td><a href='https://github.com/lonePatient/awesome-pretrained-chinese-nlp-models/blob/main'><span>TODO</span></a></td><td><a href='https://github.com/THUDM/CogVLM'><span>CogVLM</span></a><a href='https://camo.githubusercontent.com/fd367fa11ae8c60efd3ebe1b6e4e04821e9de241e7c3fd734cb97a505d0b0872/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f544855444d2f436f67564c4d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/fd367fa11ae8c60efd3ebe1b6e4e04821e9de241e7c3fd734cb97a505d0b0872/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f544855444d2f436f67564c4d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/THUDM'><span>THUDM</span></a></td><td><a href='https://github.com/THUDM/CogVLM/blob/main/assets/cogvlm-paper.pdf'><span>Paper</span></a></td></tr><tr><td><span>idefics</span></td><td><span>9/80B</span></td><td><span>2023-10</span></td><td><a href='https://huggingface.co/huggyllama/llama-65b'><span>LLaMA</span></a></td><td><a href='https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K'><span>CLIP-ViT</span></a></td><td style='text-align:center;' ><span>中英</span></td><td><span>图文</span></td><td><span>[</span><a href='https://huggingface.co/HuggingFaceM4/idefics-9b'><span>🤗HF</span><span>]</span></a></td><td><span>/</span></td><td><a href='https://huggingface.co/HuggingFaceM4'><span>HuggingFaceM4</span></a></td><td><a href='https://github.com/huggingface/m4-logs/blob/master/memos/README.md'><span>log</span></a></td></tr><tr><td><span>InternLM-XComposer</span></td><td><span>7B</span></td><td><span>2023-10</span></td><td><a href='https://github.com/InternLM/InternLM/tree/main'><span>InternLM</span></a></td><td><span>EVA-CLIP</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>图文</span></td><td><span>[</span><a href='https://huggingface.co/internlm/internlm-xcomposer-vl-7b'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/InternLM/InternLM-XComposer'><span>InternLM-XComposer</span></a><a href='https://camo.githubusercontent.com/6de606ccd4f7d73e349fa4ed91be4beda0c34b2b832beecba9dab80f36b3c5fc/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f496e7465726e4c4d2f496e7465726e4c4d2d58436f6d706f7365722e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/6de606ccd4f7d73e349fa4ed91be4beda0c34b2b832beecba9dab80f36b3c5fc/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f496e7465726e4c4d2f496e7465726e4c4d2d58436f6d706f7365722e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/InternLM'><span>InternLM</span></a></td><td><a href='https://arxiv.org/pdf/2309.15112.pdf'><span>Report</span></a></td></tr><tr><td><span>WeMix-LLM</span></td><td><span>13B</span></td><td><span>2023-09</span></td><td><span>LLama2</span></td><td><span>/</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>图文</span></td><td><span>[</span><a href='https://huggingface.co/Alpha-VLLM/WeMix-LLaMA2-13B-MM'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/Alpha-VLLM/WeMix-LLM'><span>WeMix-LLM</span></a><a href='https://camo.githubusercontent.com/93f61a16460d50794bce5ce3b417ac850579e799e03f3c26a926644426db3029/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f416c7068612d564c4c4d2f57654d69782d4c4c4d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/93f61a16460d50794bce5ce3b417ac850579e799e03f3c26a926644426db3029/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f416c7068612d564c4c4d2f57654d69782d4c4c4d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/Alpha-VLLM'><span>Alpha-VLLM</span></a></td><td>&nbsp;</td></tr><tr><td><span>Vally</span></td><td><span>7/13B</span></td><td><span>2023-08</span></td><td><span>BelleGroup/BELLE-LLaMA-EXT</span></td><td><span>OFA-Sys/chinese-clip-vit-large-patch14</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>图文</span></td><td><span>[</span><a href='https://huggingface.co/Zhaoziwang/chinese_valley7b_v1'><span>🤗HF</span><span>]</span></a><span> [</span><a href='https://huggingface.co/Zhaoziwang/chinese_valley13b_v1'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/RupertLuo/Valley'><span>Valley</span></a><a href='https://camo.githubusercontent.com/34af485d51da581fe526ca4afa292292bea85e720d3df8f988a14225c1563ca5/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f5275706572744c756f2f56616c6c65792e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/34af485d51da581fe526ca4afa292292bea85e720d3df8f988a14225c1563ca5/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f5275706572744c756f2f56616c6c65792e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/RupertLuo'><span>罗瑞璞</span></a></td><td><a href='https://arxiv.org/abs/2306.07207'><span>Paper</span></a></td></tr><tr><td><span>SALMONN</span></td><td><span>/</span></td><td><span>2023-08</span></td><td><span>/</span></td><td><span>/</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>语音</span></td><td><a href='https://github.com/lonePatient/awesome-pretrained-chinese-nlp-models/blob/main'><span>TODO</span></a></td><td><a href='https://github.com/bytedance/SALMONN'><span>SALMONN</span></a><a href='https://camo.githubusercontent.com/940235d335e243c1982e0c988e5c3322ec0ccb76d467f851504949216afd6874/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f6279746564616e63652f53414c4d4f4e4e2e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/940235d335e243c1982e0c988e5c3322ec0ccb76d467f851504949216afd6874/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f6279746564616e63652f53414c4d4f4e4e2e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/bytedance'><span>Bytedance</span></a></td><td>&nbsp;</td></tr><tr><td><span>IDEFICS</span></td><td><span>9/80B</span></td><td><span>2023-08</span></td><td><a href='https://huggingface.co/huggyllama/llama-65b'><span>llama</span></a></td><td><a href='https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K'><span>CLIP-ViT</span></a></td><td style='text-align:center;' ><span>中英</span></td><td><span>图文-通用</span></td><td><span>[</span><a href='https://huggingface.co/HuggingFaceM4/idefics-9b'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/huggingface/m4-logs'><span>m4-logs</span></a><a href='https://camo.githubusercontent.com/849a26d1c3b808b2dcf8dd697219554fc495cd44801f9c2815171b21e40f346b/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f68756767696e67666163652f6d342d6c6f67732e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/849a26d1c3b808b2dcf8dd697219554fc495cd44801f9c2815171b21e40f346b/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f68756767696e67666163652f6d342d6c6f67732e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://huggingface.co/HuggingFaceM4'><span>HuggingFaceM4</span></a></td><td><a href='https://huggingface.co/papers/2306.16527'><span>Paper</span></a></td></tr><tr><td><span>Qwen-VL</span></td><td><span>7B</span></td><td><span>2023-08</span></td><td><a href='https://github.com/QwenLM/Qwen-7B'><span>Qwen-7B</span></a></td><td><a href='https://github.com/mlfoundations/open_clip'><span>Openclip ViT-bigG</span></a></td><td style='text-align:center;' ><span>中英</span></td><td><span>通用</span></td><td><span>[</span><a href='https://huggingface.co/Qwen/Qwen-VL'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/QwenLM/Qwen-VL'><span>Qwen-VL</span></a><a href='https://camo.githubusercontent.com/a5dc9ce5b061026543c660a3231352958ead6f8ccc7a0ae1efc6c3478fdd7ebd/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f5177656e4c4d2f5177656e2d564c2e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/a5dc9ce5b061026543c660a3231352958ead6f8ccc7a0ae1efc6c3478fdd7ebd/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f5177656e4c4d2f5177656e2d564c2e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/QwenLM'><span>阿里云</span></a></td><td>&nbsp;</td></tr><tr><td><span>Qwen-VL-chat</span></td><td><span>7B</span></td><td><span>2023-08</span></td><td><a href='https://github.com/QwenLM/Qwen-7B'><span>Qwen-7B</span></a></td><td><a href='https://github.com/mlfoundations/open_clip'><span>Openclip ViT-bigG</span></a></td><td style='text-align:center;' ><span>中英</span></td><td><span>通用</span></td><td><span>[</span><a href='https://huggingface.co/Qwen/Qwen-VL-Chat'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/QwenLM/Qwen-VL'><span>Qwen-VL</span></a><a href='https://camo.githubusercontent.com/a5dc9ce5b061026543c660a3231352958ead6f8ccc7a0ae1efc6c3478fdd7ebd/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f5177656e4c4d2f5177656e2d564c2e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/a5dc9ce5b061026543c660a3231352958ead6f8ccc7a0ae1efc6c3478fdd7ebd/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f5177656e4c4d2f5177656e2d564c2e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/QwenLM'><span>阿里云</span></a></td><td>&nbsp;</td></tr><tr><td><span>LLasM</span></td><td><span>7B</span></td><td><span>2023-07</span></td><td><a href='https://github.com/LinkSoul-AI/Chinese-Llama-2-7b'><span>Chinese-Llama2</span></a></td><td><span>whisper-large-v2</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>语音</span></td><td><span>[</span><a href='https://huggingface.co/LinkSoul/LLaSM-Cllama2'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/LinkSoul-AI/LLaSM'><span>LLaSM</span></a><a href='https://camo.githubusercontent.com/b1fd0092f40a93daaa3cb28796e93b3e50d406549d09e7bf27328bfe49d626a5/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f4c696e6b536f756c2d41492f4c4c61534d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/b1fd0092f40a93daaa3cb28796e93b3e50d406549d09e7bf27328bfe49d626a5/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f4c696e6b536f756c2d41492f4c4c61534d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/LinkSoul-AI'><span>北京灵琐</span></a></td><td>&nbsp;</td></tr><tr><td><span>Chinese-LLaVA</span></td><td><span>7B</span></td><td><span>2023-07</span></td><td><a href='https://github.com/LinkSoul-AI/Chinese-Llama-2-7b'><span>Chinese-Llama2</span></a></td><td><span>Clip-vit</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>视觉</span></td><td><span>[</span><a href='https://huggingface.co/LinkSoul/Chinese-LLaVA-Cllama2'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/LinkSoul-AI/Chinese-LLaVA'><span>Chinese-LLaVA</span></a><a href='https://camo.githubusercontent.com/28d3539e9d60561ada7982717544742fee439b602c0f3a0130688bcf80ff5abe/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f4c696e6b536f756c2d41492f4368696e6573652d4c4c6156412e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/28d3539e9d60561ada7982717544742fee439b602c0f3a0130688bcf80ff5abe/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f4c696e6b536f756c2d41492f4368696e6573652d4c4c6156412e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/LinkSoul-AI'><span>北京灵琐</span></a></td><td>&nbsp;</td></tr><tr><td><span>RemoteGLM</span></td><td><span>6B</span></td><td><span>2023-07</span></td><td><span>VisualGLM-6B</span></td><td><span>VisualGLM-6B</span></td><td style='text-align:center;' ><span>中文</span></td><td><span>遥感</span></td><td><a href='https://github.com/lonePatient/awesome-pretrained-chinese-nlp-models/blob/main'><span>TODO</span></a></td><td><a href='https://github.com/lzw-lzw/RemoteGLM'><span>RemoteGLM</span></a><a href='https://camo.githubusercontent.com/721949fc6543d9ec5b08b036bdbd655887bddb735f7e8510fbf240b24f2126cc/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f6c7a772d6c7a772f52656d6f7465474c4d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/721949fc6543d9ec5b08b036bdbd655887bddb735f7e8510fbf240b24f2126cc/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f6c7a772d6c7a772f52656d6f7465474c4d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/lzw-lzw'><span>lzw-lzw</span></a></td><td>&nbsp;</td></tr><tr><td><span>VisualCLA</span></td><td><span>7B</span></td><td><span>2023-07</span></td><td><a href='https://github.com/ymcui/Chinese-LLaMA-Alpaca/wiki/模型合并与转换'><span>Chinese-Alpaca-Plus</span></a></td><td><a href='https://huggingface.co/openai/clip-vit-large-patch14'><span>CLIP-ViT-L/14</span></a></td><td style='text-align:center;' ><span>中文</span></td><td><span>视觉</span></td><td><span>[</span><a href='https://pan.baidu.com/s/1bBF5QHoZxHRnWeTPHL19CQ?pwd=xxbg'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/airaria/Visual-Chinese-LLaMA-Alpaca'><span>Visual-Chinese-LLaMA-Alpaca</span></a><a href='https://camo.githubusercontent.com/da1fbb44058de128eafbdeedbd2464b1d70a164271dea4a17646c845889b77cd/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f616972617269612f56697375616c2d4368696e6573652d4c4c614d412d416c706163612e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/da1fbb44058de128eafbdeedbd2464b1d70a164271dea4a17646c845889b77cd/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f616972617269612f56697375616c2d4368696e6573652d4c4c614d412d416c706163612e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/airaria'><span>Ziqing Yang</span></a></td><td>&nbsp;</td></tr><tr><td><span>yuren</span></td><td><span>7B</span></td><td><span>2023-07</span></td><td><a href='https://huggingface.co/baichuan-inc/baichuan-7B'><span>baichuan-7B</span></a></td><td><a href='https://huggingface.co/laion/CLIP-ViT-L-14-DataComp.XL-s13B-b90K'><span>CLIP</span></a></td><td style='text-align:center;' ><span>中英</span></td><td><span>视觉</span></td><td><span>[</span><a href='https://huggingface.co/pleisto/yuren-baichuan-7b'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/pleisto/yuren-baichuan-7b'><span>yuren-baichuan-7b</span></a><a href='https://camo.githubusercontent.com/15d77e385485832babc07ab2d2e8e263cd50e1904c17db33c13a0f7bcfab923b/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f706c656973746f2f797572656e2d626169636875616e2d37622e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/15d77e385485832babc07ab2d2e8e263cd50e1904c17db33c13a0f7bcfab923b/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f706c656973746f2f797572656e2d626169636875616e2d37622e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/pleisto'><span>Pleisto</span></a></td><td>&nbsp;</td></tr><tr><td><span>VisCPM-Chat</span></td><td><span>10B</span></td><td><span>2023-06</span></td><td><span>CPM-Bee</span></td><td><span>Q-Former</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>视觉</span></td><td><span>[</span><a href='https://huggingface.co/openbmb/VisCPM-Chat'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/OpenBMB/VisCPM'><span>VisCPM</span></a><a href='https://camo.githubusercontent.com/0468eafacd8fc4699aa304227f531cb2f91f4bba3bc2be127f0c984c23450f05/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f4f70656e424d422f56697343504d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/0468eafacd8fc4699aa304227f531cb2f91f4bba3bc2be127f0c984c23450f05/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f4f70656e424d422f56697343504d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/OpenBMB'><span>OpenBMB</span></a></td><td>&nbsp;</td></tr><tr><td><span>VisCPM-Paint</span></td><td><span>10B</span></td><td><span>2023-06</span></td><td><span>CPM-Bee</span></td><td><a href='https://github.com/Stability-AI/stablediffusion'><span>Stable Diffusion 2.1</span></a></td><td style='text-align:center;' ><span>中英</span></td><td><span>视觉</span></td><td><span>[</span><a href='https://huggingface.co/openbmb/VisCPM-Paint'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/OpenBMB/VisCPM'><span>VisCPM</span></a><a href='https://camo.githubusercontent.com/0468eafacd8fc4699aa304227f531cb2f91f4bba3bc2be127f0c984c23450f05/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f4f70656e424d422f56697343504d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/0468eafacd8fc4699aa304227f531cb2f91f4bba3bc2be127f0c984c23450f05/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f4f70656e424d422f56697343504d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/OpenBMB'><span>OpenBMB</span></a></td><td>&nbsp;</td></tr><tr><td><span>XrayPULSE</span></td><td><span>7B</span></td><td><span>2023-06</span></td><td><a href='https://github.com/openmedlab/PULSE'><span>PULSE</span></a></td><td><a href='https://github.com/RyanWangZf/MedCLIP'><span>MedCLIP</span></a></td><td style='text-align:center;' ><span>中文</span></td><td><span>医学</span></td><td><span>[</span><a href='https://drive.google.com/file/d/1VsO61-3DFuK4ysGPvoD4_JZaRFKvAJR_/view?usp=drive_link'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/openmedlab/XrayPULSE'><span>XrayPULSE</span></a><a href='https://camo.githubusercontent.com/065895eb936407f21ea715d74b6d5cd4a0944b45285a5e7d6ea933033502d5ca/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f6f70656e6d65646c61622f5872617950554c53452e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/065895eb936407f21ea715d74b6d5cd4a0944b45285a5e7d6ea933033502d5ca/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f6f70656e6d65646c61622f5872617950554c53452e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/OpenMEDLab'><span>OpenMEDLab</span></a></td><td>&nbsp;</td></tr><tr><td><span>SEEChat</span></td><td><span>6B</span></td><td><span>2023-06</span></td><td><a href='https://github.com/THUDM/ChatGLM-6B'><span>ChatGLM</span></a></td><td><span>CLIP-ViT</span></td><td style='text-align:center;' ><span>中文</span></td><td><span>/</span></td><td><span>[</span><a href='https://github.com/360CVGroup/SEEChat'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/360CVGroup/SEEChat'><span>SEEChat</span></a><a href='https://camo.githubusercontent.com/1cf92d7c937c2498fa769bb65149f9e9e241fec27ffc1c57df0ec15e75dff5c4/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f333630435647726f75702f534545436861742e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/1cf92d7c937c2498fa769bb65149f9e9e241fec27ffc1c57df0ec15e75dff5c4/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f333630435647726f75702f534545436861742e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/360CVGroup'><span>360</span></a></td><td>&nbsp;</td></tr><tr><td><span>Ziya-BLIP2-14B-Visual-v1</span></td><td><span>14B</span></td><td><span>2023-06</span></td><td><a href='https://huggingface.co/IDEA-CCNL/Ziya-LLaMA-13B-v1'><span>LLaMA-13B</span></a></td><td><span>BLIP2</span></td><td style='text-align:center;' ><span>中英</span></td><td><span>通用</span></td><td><span>[</span><a href='https://huggingface.co/IDEA-CCNL/Ziya-BLIP2-14B-Visual-v1'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/IDEA-CCNL/Fengshenbang-LM'><span>Fengshenbang-LM</span></a><a href='https://camo.githubusercontent.com/4ee89147e5a01c2ab460325935c0bbd84160eb94372ddc7ed9047a16597e9689/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f494445412d43434e4c2f46656e677368656e62616e672d4c4d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/4ee89147e5a01c2ab460325935c0bbd84160eb94372ddc7ed9047a16597e9689/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f494445412d43434e4c2f46656e677368656e62616e672d4c4d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/IDEA-CCNL'><span>IDEA研究院</span></a></td><td>&nbsp;</td></tr><tr><td><span>Video-LLaMA-BiLLA</span></td><td><span>7B</span></td><td><span>2023-05</span></td><td><span>BiLLa-7B</span></td><td><a href='https://github.com/Vision-CAIR/MiniGPT-4'><span>MiniGPT-4</span></a></td><td style='text-align:center;' ><span>中英</span></td><td><span>通用</span></td><td><span>[</span><a href='https://huggingface.co/DAMO-NLP-SG/Video-LLaMA-Series/resolve/main/finetune-billa7b-zh.pth'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/DAMO-NLP-SG/Video-LLaMA'><span>Video-LLaMA</span></a><a href='https://camo.githubusercontent.com/a9cae744ca5ecdad63fa104e8db792e7fb2086947f4045fd8cb4ea8667c3aa41/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f44414d4f2d4e4c502d53472f566964656f2d4c4c614d412e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/a9cae744ca5ecdad63fa104e8db792e7fb2086947f4045fd8cb4ea8667c3aa41/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f44414d4f2d4e4c502d53472f566964656f2d4c4c614d412e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/DAMO-NLP-SG'><span>达摩院多语言NLP</span></a></td><td><a href='https://arxiv.org/abs/2306.02858'><span>Paper</span></a></td></tr><tr><td><span>Video-LLaMA-Ziya</span></td><td><span>13B</span></td><td><span>2023-05</span></td><td><a href='https://huggingface.co/IDEA-CCNL/Ziya-LLaMA-13B-v1'><span>Ziya-13B</span></a></td><td><a href='https://github.com/Vision-CAIR/MiniGPT-4'><span>MiniGPT-4</span></a></td><td style='text-align:center;' ><span>中英</span></td><td><span>通用</span></td><td><span>[</span><a href='https://huggingface.co/DAMO-NLP-SG/Video-LLaMA-Series/resolve/main/finetune-ziya13b-zh.pth'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/DAMO-NLP-SG/Video-LLaMA'><span>Video-LLaMA</span></a><a href='https://camo.githubusercontent.com/a9cae744ca5ecdad63fa104e8db792e7fb2086947f4045fd8cb4ea8667c3aa41/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f44414d4f2d4e4c502d53472f566964656f2d4c4c614d412e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/a9cae744ca5ecdad63fa104e8db792e7fb2086947f4045fd8cb4ea8667c3aa41/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f44414d4f2d4e4c502d53472f566964656f2d4c4c614d412e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/DAMO-NLP-SG'><span>达摩院多语言NLP</span></a></td><td><a href='https://arxiv.org/abs/2306.02858'><span>Paper</span></a></td></tr><tr><td><span>XrayGLM</span></td><td><span>6B</span></td><td><span>2023-05</span></td><td><a href='https://github.com/THUDM/ChatGLM-6B'><span>ChatGLM-6B</span></a></td><td><a href='https://arxiv.org/abs/2301.12597'><span>BLIP2-Qformer</span></a></td><td style='text-align:center;' ><span>中英</span></td><td><span>医学</span></td><td><span>[</span><a href='https://huggingface.co/wangrongsheng/XrayGLM-300'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/WangRongsheng/XrayGLM'><span>XrayGLM</span></a><a href='https://camo.githubusercontent.com/213eec81ba2dc5c14a8902999b89edc679d7ecd41871400805c5739d0c43bd9f/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f57616e67526f6e677368656e672f58726179474c4d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/213eec81ba2dc5c14a8902999b89edc679d7ecd41871400805c5739d0c43bd9f/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f57616e67526f6e677368656e672f58726179474c4d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://www.mpu.edu.mo/esca/zh/index.php'><span>澳门理工大学</span></a></td><td>&nbsp;</td></tr><tr><td><span>X-LLM</span></td><td>&nbsp;</td><td><span>2023-05</span></td><td><a href='https://github.com/THUDM/ChatGLM-6B'><span>ChatGLM</span></a></td><td><a href='https://arxiv.org/abs/2106.04560'><span>ViT-g</span></a></td><td style='text-align:center;' ><span>中文</span></td><td><span>/</span></td><td><a href='https://github.com/lonePatient/awesome-pretrained-chinese-nlp-models/blob/main'><span>TODO</span></a></td><td><a href='https://github.com/phellonchen/X-LLM'><span>X-LLM</span></a><a href='https://camo.githubusercontent.com/a42deae63491d096c3d3b369533f513c96bcd7538108a7028cbaa6172ff091ba/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f7068656c6c6f6e6368656e2f582d4c4c4d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/a42deae63491d096c3d3b369533f513c96bcd7538108a7028cbaa6172ff091ba/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f7068656c6c6f6e6368656e2f582d4c4c4d2e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td><a href='https://github.com/phellonchen'><span>中科院自动化所</span></a></td><td><a href='https://arxiv.org/pdf/2305.04160.pdf'><span>Paper</span></a></td></tr><tr><td><span>VisualGLM</span></td><td><span>6B</span></td><td><span>2023-05</span></td><td><a href='https://github.com/THUDM/ChatGLM-6B'><span>ChatGLM-6B</span></a></td><td><a href='https://arxiv.org/abs/2301.12597'><span>BLIP2-Qformer</span></a></td><td style='text-align:center;' ><span>中英</span></td><td><span>视觉</span></td><td><span>[</span><a href='https://huggingface.co/THUDM/visualglm-6b'><span>🤗HF</span><span>]</span></a></td><td><a href='https://github.com/THUDM/VisualGLM-6B'><span>VisualGLM-6B</span></a><a href='https://camo.githubusercontent.com/90f199b10e2ec94767532fab94571ef7afacb5123fe528a104a5c9cad7d9e9eb/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f544855444d2f56697375616c474c4d2d36422e7376673f7374796c653d736f6369616c266c6162656c3d53746172'><img src="https://camo.githubusercontent.com/90f199b10e2ec94767532fab94571ef7afacb5123fe528a104a5c9cad7d9e9eb/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f544855444d2f56697375616c474c4d2d36422e7376673f7374796c653d736f6369616c266c6162656c3d53746172" referrerpolicy="no-referrer" alt="Star"></a></td><td>&nbsp;</td><td>&nbsp;</td></tr></tbody></table></figure><p>&nbsp;</p><p>&nbsp;</p><h2><a name="其他" class="md-header-anchor"></a><span>其他</span></h2><p><span>非大模型，但是很全的网络模型：</span><a href='https://github.com/Deep-Spark/DeepSparkHub'><span>Deep-Spark/DeepSparkHub: DeepSparkHub selects hundreds of application algorithms and models, covering various fields of AI and general-purpose computing, to support the mainstream intelligent computing scenarios. (github.com)</span></a></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h1><a name="大模型与gpu算力" class="md-header-anchor"></a><span>大模型与GPU算力</span></h1><h3><a name="重要参数" class="md-header-anchor"></a><span>重要参数</span></h3><p><strong><span>FLOPS</span></strong><span>：每秒执行的浮点运算次数，是衡量 GPU 计算能力的标准。</span></p><ul><li><strong><span>单精度 FLOPS（FP32）</span></strong><span>：用于大部分深度学习模型训练。</span></li><li><strong><span>双精度 FLOPS（FP64）</span></strong><span>：用于科学计算和高精度任务。</span></li><li><strong><span>半精度 FLOPS（FP16）</span></strong><span>：用于加速训练过程，尤其是大规模模型训练。</span></li></ul><p><strong><span>显存(VRAM)</span></strong><span>：GPU 用于存储数据的内存，存储内容包括模型参数、激活值、中间计算结果等。</span></p><p><strong><span>显存带宽</span></strong><span>：GPU 和显存之间的数据传输速度，以 GB/s 为单位。</span></p><p>&nbsp;</p><h3><a name="几款gpu参数" class="md-header-anchor"></a><span>几款GPU参数</span></h3><figure><table><thead><tr><th><span>GPU 型号</span></th><th><span>单精度 FLOPS (FP32)</span></th><th><span>显存容量</span></th><th><span>显存类型</span></th><th><span>显存带宽</span></th></tr></thead><tbody><tr><td><span>RTX 3080</span></td><td><span>29.8 TFLOPS</span></td><td><span>10GB GDDR6X</span></td><td><span>GDDR6X</span></td><td><span>760.3 GB/s</span></td></tr><tr><td><span>RTX 3090</span></td><td><span>35.6 TFLOPS</span></td><td><span>24GB GDDR6X</span></td><td><span>GDDR6X</span></td><td><span>936.2 GB/s</span></td></tr><tr><td><span>RTX 4080</span></td><td><span>48.74 TFLOPS</span></td><td><span>16GB GDDR6X</span></td><td><span>GDDR6X</span></td><td><span>716.8 GB/s</span></td></tr><tr><td><span>RTX 4090</span></td><td><span>82.58 TFLOPS</span></td><td><span>24GB GDDR6X</span></td><td><span>GDDR6X</span></td><td><span>1,008 GB/s</span></td></tr><tr><td><span>T4</span></td><td><span>8.1 TFLOPS</span></td><td><span>16GB GDDR6</span></td><td><span>GDDR6</span></td><td><span>320 GB/s</span></td></tr><tr><td><span>A10</span></td><td><span>31.2 TFLOPS</span></td><td><span>24GB GDDR6</span></td><td><span>GDDR6</span></td><td><span>600 GB/s</span></td></tr><tr><td><span>A6000</span></td><td><span>38.7 TFLOPS</span></td><td><span>48GB GDDR6</span></td><td><span>GDDR6</span></td><td><span>768 GB/s</span></td></tr><tr><td><span>A100</span></td><td><span>19.5 TFLOPS</span></td><td><span>40GB / 80GB HBM2</span></td><td><span>HBM2</span></td><td><span>1.6 TB/s</span></td></tr><tr><td><span>V100</span></td><td><span>15.7 TFLOPS</span></td><td><span>16GB / 32GB HBM2</span></td><td><span>HBM2</span></td><td><span>900 GB/s</span></td></tr><tr><td><span>A800</span></td><td><span>20 TFLOPS</span></td><td><span>80GB HBM2e</span></td><td><span>HBM2e</span></td><td><span>2 TB/s</span></td></tr><tr><td><span>H100</span></td><td><span>60 TFLOPS</span></td><td><span>80GB HBM2e</span></td><td><span>HBM2e</span></td><td><span>2 TB/s</span></td></tr></tbody></table></figure><p><img src="./assets/HuggingFaceGPUs.png" referrerpolicy="no-referrer" alt="image-20240527213941511"></p><ul><li><span>显存与参数量关系计算：每个float32参数要占4字节，因此有（数量级）最小显存大小=模型参数量×4.</span></li><li><span>单个模型副本中每个参数量大约需要20倍于自身大小的空间占用，以175B模型训练为例，至少需要3.5TB的显存空间占用。模型推理中的显存压力相对小些， 只需1~2倍于模型参数的空间占用。</span></li></ul><h3><a name="一些建议情况" class="md-header-anchor"></a><strong><span>一些建议情况</span></strong></h3><p><img src="./assets/Recommendation.png" style="zoom:50%;" /></p><p>&nbsp;</p><h3><a name="具体开源模型建议" class="md-header-anchor"></a><span>具体开源模型建议</span></h3><h4><a name="chatglm3-6b" class="md-header-anchor"></a><strong><span>ChatGLM3-6B</span></strong></h4><p><strong><span>微调</span></strong><span>：H100、A100</span></p><ul><li><span>SFT 全量微调: 4张显卡平均分配，每张显卡占用 </span><code>48346MiB</code><span> 显存。</span></li><li><span>P-TuningV2 微调: 1张显卡，占用 </span><code>18426MiB</code><span> 显存。</span></li><li><span>LORA 微调: 1张显卡，占用 </span><code>14082MiB</code><span> 显存。</span></li></ul><p><strong><span>推理</span></strong><span>：默认情况下，模型以 FP16 精度加载，运行需要大概 13GB 显存。</span></p><p>&nbsp;</p><p>&nbsp;</p><h4><a name="llama2系列" class="md-header-anchor"></a><span>LLAMA2系列</span></h4><p><em><span>通义千问输出</span></em></p><p><strong><span>推理</span></strong><span>：</span></p><p><strong><span>全精度</span></strong><span>（FP32）</span></p><ul><li><span>Llama2 7B最低显存要求为28GB。</span></li><li><span>Llama2 13B最低显存要求为52GB。</span></li><li><span>Llama2 70B最低显存要求高达280GB。</span></li></ul><p><strong><span>低精度</span></strong><span>：</span></p><ul><li><span>对于16位精度（FP16 或其他半精度格式），Llama2 7B、13B、70B模型所需的最低显存分别约为14GB、26GB、140GB。</span></li><li><span>对于8位精度，这些数字进一步减小到7GB、13GB、70GB。</span></li></ul><p><em><span>GPT-4o输出</span></em></p><p><img src="./assets/GPT4oOutput.png" style="zoom: 50%;" /></p><p>&nbsp;</p><h3><a name="qwen系列" class="md-header-anchor"></a><span>Qwen系列</span></h3><p><img src="./assets/QwenInference.png" style="zoom: 50%;" /></p><p>&nbsp;</p><h3><a name="bentsao本草httpsgithubcomscir-hihuatuo-llama-med-chinese" class="md-header-anchor"></a><strong><a href='https://github.com/SCIR-HI/Huatuo-Llama-Med-Chinese'><span>BenTsao(本草)</span></a></strong></h3><p><span>（基于LLAMA-7B）基于LLaMA模型的指令微调过程中，我们在一张A100-SXM-80GB显卡上进行了训练，训练总轮次10轮，耗时约2h17m。batch_size=128的情况下显存占用在40G左右。预计3090/4090显卡(24GB显存)以上显卡可以较好支持，根据显存大小来调整batch_size。</span></p><p>&nbsp;</p><h3><a name="chinese-vicuna-medhttpsgithubcomfacicochinese-vicuna" class="md-header-anchor"></a><strong><a href='https://github.com/Facico/Chinese-Vicuna'><span>Chinese-vicuna-med</span></a></strong></h3><p><span>基座模型：LlaMa-7B/13B</span></p><ul><li><p><strong><span>训练</span></strong><span>：一张2080Ti即可。由于数据长度都在256（代码设置为cutoff_len，默认阶段长度）以内，大概占用9G显存。</span></p><ul><li><span>70w的数据，3个epoch，一张2080Ti大概200h</span></li><li><span>13B需要18G左右显存（在3090上可以将数据长度开到2048）</span></li></ul></li><li><p><strong><span>推理</span></strong><span>：一张2080Ti即可（7B）,同时支持多卡推理（差不多均匀负载，某张卡会负载高一点）。</span></p></li></ul><p>&nbsp;</p><h3><a name="xrayglmhttpsgithubcomwangrongshengxrayglm-" class="md-header-anchor"></a><strong><a href='https://github.com/WangRongsheng/XrayGLM '><span>XrayGLM</span></a></strong></h3><p><span>基座模型：</span><a href='https://github.com/THUDM/VisualGLM-6B'><span>VisualGLM-6B</span></a></p><p><strong><span>微调</span></strong><span>：4bit量化的情况下可以用7GB，否则需要十几个GB，全量微调的话需要50多个GB，使用4张A100可以跑起来。</span></p><p>&nbsp;</p><h3><a name="lawgpthttpsgithubcompengxiao-songlawgpt" class="md-header-anchor"></a><strong><a href='https://github.com/pengxiao-song/LaWGPT'><span>LaWGPT</span></a></strong><span> </span></h3><p><span>（参数量约7B，数据量较大）在通用中文基座模型（</span><a href='https://github.com/ymcui/Chinese-LLaMA-Alpaca'><span>ymcui/Chinese-LLaMA-Alpaca: 中文LLaMA&amp;Alpaca大语言模型+本地CPU/GPU训练部署 (Chinese LLaMA &amp; Alpaca LLMs) (github.com)</span></a><span>）的基础上扩充法律领域专有词表、</span><strong><span>大规模中文法律语料预训练</span></strong><span>，增强了大模型在法律领域的基础语义理解能力。</span></p><p><strong><span>训练</span></strong><span>：8 张 Tesla V100-SXM2-32GB ：二次训练阶段耗时约 24h / epoch，微调阶段耗时约 12h / epoch</span></p><p>&nbsp;</p><h3><a name="codegeex2httpsgithubcomthudmcodegeex2" class="md-header-anchor"></a><strong><a href='https://github.com/THUDM/CodeGeeX2'><span>codegeex2</span></a></strong></h3><p><span>基座模型：ChatGLM2-6B</span></p><p><strong><span>推理</span></strong><span>：CodeGeeX2-6B 更好支持中英文输入，支持最大 8192 序列长度，推理速度较一代 CodeGeeX-13B 大幅提升，量化后仅需6GB显存即可运行，支持轻量级本地化部署。测试硬件为</span><code>GeForce RTX-3090</code><span>。</span></p><p>&nbsp;</p><h3><a name="deepseekmoehttpsgithubcomdeepseek-aideepseek-moe" class="md-header-anchor"></a><strong><a href='https://github.com/deepseek-ai/DeepSeek-MoE'><span>DeepSeekMoE</span></a></strong></h3><p><span>参数量：16B</span></p><p><strong><span>推理</span></strong><span>：可以部署在具有 40GB 内存的单个 GPU 上，无需量化。 </span></p><p><strong><span>微调</span></strong><span>：在 8 个 A100 40GB GPU 上运行。也可以使用 4/8 位 qlora 微调模型，请随时尝试。对于此配置，可以在单个 A100 80G GPU 上运行。</span></p><p>&nbsp;</p><h3><a name="educhathttpsgithubcomicalk-nlpeduchat" class="md-header-anchor"></a><strong><a href='https://github.com/icalk-nlp/EduChat'><span>EduChat</span></a></strong></h3><p><strong><span>参数量</span></strong><span>：7B</span></p><p><strong><span>推理</span></strong><span>：可在单张A100/A800或CPU运行，使用FP16精度时约占用15GB显存</span></p><p>&nbsp;</p><h3><a name="agrigpts系列模型" class="md-header-anchor"></a><span>AgriGPTs系列模型</span></h3><ul><li><a href='https://huggingface.co/AgriGPTs/AgriGPT-6B'><span>AgriGPT-6B</span></a><span>，此版本为学术demo版，基于</span><a href='https://github.com/THUDM/ChatGLM2-6B'><span>ChatGLM2-6B</span></a><span>训练而来,所需显存约13225MB/1024=12.91GB。</span></li><li><a href='https://huggingface.co/AgriGPTs/AgriGPT-13B'><span>AgriGPT-13B</span></a><span>，此版本为学术demo版，基于</span><a href='https://github.com/baichuan-inc/Baichuan2-13B'><span>Baichuan2-13B</span></a><span>训练而来所需显存约30425MB/1024=29.7GB。</span></li></ul><p>&nbsp;</p><h3><a name="yayi-雅意httpsgithubcomwenge-researchyayi" class="md-header-anchor"></a><strong><a href='https://github.com/wenge-research/YaYi'><span>YaYi (雅意)</span></a></strong></h3><p><strong><span>推理</span></strong><span>：可在单张 A100/A800/3090 等GPU运行</span></p><p><strong><span>微调</span></strong><span>：全参数微调建议使用 4*A100(80G) 以上硬件配置；LoRA微调使用单卡 A100(80G) 即可完成微调，学习率可调整为较大值。</span></p></div>
+</body>
+</html>
