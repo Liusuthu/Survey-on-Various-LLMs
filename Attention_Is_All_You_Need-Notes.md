@@ -267,8 +267,6 @@ $$
 
 <img src="./assets/input.jpg" alt="img" style="zoom: 80%;" />
 
-<img src="https://xqimg.imedao.com/18ea35a6aab9e5a3fe8aacbc.jpeg!800.jpg" alt="img" style="zoom: 80%;" />
-
 为方便理解，以下的图示与介绍中将去掉 batch_size 维度，聚焦于剩下的维度：
 
 <img src="./assets/input_wo_batch.jpg" alt="img" style="zoom:80%;" />
